@@ -10,7 +10,7 @@ Run500Miles::Application.routes.draw do
   match '/contact', :to => 'pages#contact'
   match '/profile', :to => 'pages#profile'
   match '/log_run', :to => 'pages#log_run'
-  match '/signup', :to => 'pages#signup'
+  match '/signup', :to => 'users#signup'
   match '/login', :to => 'pages#login'
   match '/about', :to => 'pages#about'
   match '/help', :to => 'pages#help'

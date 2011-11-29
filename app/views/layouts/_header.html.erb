@@ -1,0 +1,12 @@
+<header>
+        <% logo = image_tag("logo.png", :alt => "Run 500 Miles", :class => "round") %>
+  <%= link_to logo, root_path %>
+        <nav class="round">
+          <ul>
+            <li><%= link_to "Home", root_path %></li>
+            <li><%= link_to "Profile", profile_path %></li>
+            <li><%= link_to "Log Your Run", log_run_path %></li>
+            <li><%= link_to "Log in", login_path %></li>
+          </ul>
+        </nav>
+      </header>
