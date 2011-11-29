@@ -1,4 +1,14 @@
 Run500Miles::Application.routes.draw do
+  get "pages/home"
+
+  get "pages/profile"
+
+  get "pages/log_run"
+
+  get "pages/login"
+
+  get "pages/contact"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
