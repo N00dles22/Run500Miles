@@ -2,12 +2,14 @@
 #
 # Table name: users
 #
-#  id         :integer         not null, primary key
-#  email      :string(255)
-#  created_at :datetime
-#  updated_at :datetime
-#  fname      :string(255)
-#  lname      :string(255)
+#  id                 :integer         not null, primary key
+#  email              :string(255)
+#  created_at         :datetime
+#  updated_at         :datetime
+#  fname              :string(255)
+#  lname              :string(255)
+#  encrypted_password :string(255)
+#  salt               :string(255)
 #
 
 class User < ActiveRecord::Base
