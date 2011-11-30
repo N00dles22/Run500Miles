@@ -6,6 +6,7 @@ Run500Miles::Application.routes.draw do
   #get "pages/login"
   #get "pages/contact"  
   #get "pages/about"
+  resources :users
   
   match '/contact', :to => 'pages#contact'
   match '/profile', :to => 'pages#profile'
