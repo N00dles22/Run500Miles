@@ -18,9 +18,9 @@ describe User do
   #pending "add some examples to (or delete) #{__FILE__}"
   before(:each) do
     @attr = {
-      :fname => "First",
-      :lname => "Last",
-      :email => "first.last@test.com",
+      :fname => "Nick",
+      :lname => "Gallegos",
+      :email => "nick.gallegost@example.com",
       :password => "foobar",
       :password_confirmation => "foobar"
       }
