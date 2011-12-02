@@ -13,11 +13,14 @@
 #
 
 class User < ActiveRecord::Base
-  attr_accessor :password
-  attr_accessible :fname, :lname, :email, :password, :password_confirmation
+  attr_accessor :password, :secret_word
+  attr_accessible :fname, :lname, :email, :password, :password_confirmation,
+  :secret_word
   
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  sw_regex = /\Aangusbeef\z/i
   
+  validates :secret_word, :format => { :with => sw_regex }
   validates :fname, :presence   => true,
                     :length     => { :maximum => 50 }
   validates :lname, :presence   => true,

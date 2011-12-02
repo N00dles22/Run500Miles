@@ -38,5 +38,6 @@ module Run500Miles
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
+    #config.filter_parameters += [:secret_code]
   end
 end
