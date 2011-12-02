@@ -7,7 +7,7 @@ describe "Users" do
     describe "failure" do
     
       it "should not make a new user" do
-	lambda do
+        lambda do
           visit signup_path
           fill_in "First Name",   :with => ""
           fill_in "Last Name",    :with => ""
