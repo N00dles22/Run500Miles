@@ -7,3 +7,15 @@ Factory.define :user do |user|
   user.password_confirmation "foobar"
   user.secret_word "angusbeef"
 end
+
+Factory.sequence :fname do |n|
+  "First#{n}"
+end
+
+Factory.sequence :lname do |n|
+  "Last#{n}"
+end
+
+Factory.sequence :email do |n|
+  "person-#{n}@example.com"
+end

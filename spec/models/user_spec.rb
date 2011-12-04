@@ -1,17 +1,3 @@
-# == Schema Information
-#
-# Table name: users
-#
-#  id                 :integer         not null, primary key
-#  email              :string(255)
-#  created_at         :datetime
-#  updated_at         :datetime
-#  fname              :string(255)
-#  lname              :string(255)
-#  encrypted_password :string(255)
-#  salt               :string(255)
-#
-
 require 'spec_helper'
 
 describe User do
@@ -167,4 +153,35 @@ describe User do
     
   end
   
+  describe "admin attribute" do
+    before(:each) do
+      @user = User.create!(@attr)
+    end
+    
+    it "should not be an admin by default" do
+      @user.should_not be_admin
+    end
+    
+    it "should be convertible to an admin" do
+      @user.toggle!(:admin)
+      @user.should be_admin
+    end
+  end
+  
 end
+
+# == Schema Information
+#
+# Table name: users
+#
+#  id                 :integer         not null, primary key
+#  email              :string(255)
+#  created_at         :datetime
+#  updated_at         :datetime
+#  fname              :string(255)
+#  lname              :string(255)
+#  encrypted_password :string(255)
+#  salt               :string(255)
+#  admin              :boolean         default(FALSE)
+#
+
