@@ -5,4 +5,9 @@
   sample application.
 </p>
 
+<% if signed_in? %>
+<!--Display personal stats-->
+Personal stats go here!
+  <% else %>
 <%= link_to "Sign up now!", signup_path, :class => "signup_button round" %>
+<% end %>

@@ -46,33 +46,33 @@ describe UsersController do
     end
     
     it "should have a first name field" do
-      get :signup
-      response.should have_selector("input[fname='user[fname]'][type='text']")
+      get 'signup'
+      response.should have_selector("input[name='user[fname]'][type='text']")
     end
     
     it "should have a last name field" do
-      get :signup
-      response.should have_selector("input[lname='user[lname]'][type='text']")
+      get 'signup'
+      response.should have_selector("input[name='user[lname]'][type='text']")
     end
     
     it "should have an email field" do
-      get :signup
-      response.should have_selector("input[email='user[email]'][type='text']")
+      get 'signup'
+      response.should have_selector("input[name='user[email]'][type='text']")
     end
     
     it "should have a password field" do
-      get :signup
-      response.should have_selector("input[password='user[password]'][type='password']")
+      get 'signup'
+      response.should have_selector("input[name='user[password]'][type='password']")
     end
     
     it "should have a password confirmation field" do
-      get :signup
-      response.should have_selector("input[password_confirmation='user[password_confirmation]'][type='password']")
+      get 'signup'
+      response.should have_selector("input[name='user[password_confirmation]'][type='password']")
     end
     
     it "should have a first secret word field" do
-      get :signup
-      response.should have_selector("input[secret_word='user[secret_word]'][type='password']")
+      get 'signup'
+      response.should have_selector("input[name='user[secret_word]'][type='password']")
     end
     
   end
@@ -82,7 +82,7 @@ describe UsersController do
     describe "failure" do
       before(:each) do
         @attr = { :fname => "", :lname => "", :password => "",
-          :password_confirmation => ""}
+          :password_confirmation => "", :secret_word => ""}
       end
       
       it "should not create a user" do
@@ -107,7 +107,8 @@ describe UsersController do
       before(:each) do
         @attr = {:fname => "New", :lname => "User",
           :email => "user@example.com",
-          :password => "foobar", :password_confirmation => "foobar"}
+          :password => "foobar", :password_confirmation => "foobar",
+          :secret_word => "angusbeef"}
       end
       
       it "should create a user" do
@@ -124,6 +125,11 @@ describe UsersController do
       it "should have a welcome message" do
         post :create, :user => @attr
         flash[:success].should =~ /welcome/i
+      end
+      
+      it "should sign the user in" do
+        post :create, :user => @attr
+        controller.should be_signed_in
       end
     end
   end

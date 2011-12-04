@@ -22,7 +22,8 @@ describe User do
       :lname => "Gallegos",
       :email => "nick.gallegost@example.com",
       :password => "foobar",
-      :password_confirmation => "foobar"
+      :password_confirmation => "foobar",
+      :secret_word => "angusbeef"
       }
   end
   
