@@ -22,7 +22,8 @@ describe User do
       :lname => "Gallegos",
       :email => "nick.gallegost@example.com",
       :password => "foobar",
-      :password_confirmation => "foobar"
+      :password_confirmation => "foobar",
+      :secret_word => "angusbeef"
       }
   end
   
@@ -43,6 +44,24 @@ describe User do
   it "should require an email address" do
    no_email_user = User.new(@attr.merge(:email => ""))
    no_email_user.should_not be_valid
+  end
+  
+  it "should require a secret word" do
+    no_sw_user = User.new(@attr.merge(:secret_word => ""))
+    no_sw_user.should_not be_valid
+  end
+  
+  it "should accept the secret word" do
+    sw_user = User.new(@attr.merge(:secret_word => "angusbeef"))
+    sw_user.should be_valid
+  end
+  
+  it "should reject incorrect secret words" do
+    secret_words = %w[testword notangusbeef wrongsw]
+    secret_words.each do |sw|
+      invalid_sw_user = User.new(@attr.merge(:secret_word => sw))
+      invalid_sw_user.should_not be_valid
+    end
   end
   
   it "should reject first names that are too long" do

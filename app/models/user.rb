@@ -14,13 +14,13 @@
 
 class User < ActiveRecord::Base
   attr_accessor :password, :secret_word
-  attr_accessible :fname, :lname, :email, :password, :password_confirmation,
-  :secret_word
+  attr_accessible :fname, :lname, :email,
+                  :password, :password_confirmation,
+                  :secret_word
   
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   sw_regex = /\Aangusbeef\z/i
   
-  validates :secret_word, :format => { :with => sw_regex }
   validates :fname, :presence   => true,
                     :length     => { :maximum => 50 }
   validates :lname, :presence   => true,
@@ -33,6 +33,9 @@ class User < ActiveRecord::Base
                         :confirmation => true,
                         :length       => { :within => 6..40 }
                         
+  validates :secret_word, :presence => true,
+                          :format => { :with => sw_regex }
+  
   before_save :encrypt_password
   
   # Return true if the user's password matches the submitted password
