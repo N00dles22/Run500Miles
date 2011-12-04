@@ -1,4 +1,6 @@
 Run500Miles::Application.routes.draw do
+  #get "session/new"
+
   #old stuff
   #get "pages/home"
   #get "pages/profile"
@@ -7,11 +9,14 @@ Run500Miles::Application.routes.draw do
   #get "pages/contact"  
   #get "pages/about"
   resources :users
+  resources :sessions, :only => [:new, :create, :destroy]
   
   match '/contact', :to => 'pages#contact'
   match '/profile', :to => 'pages#profile'
   match '/log_run', :to => 'pages#log_run'
   match '/signup', :to => 'users#signup'
+  match '/signin', :to => 'sessions#new'
+  match '/signout', :to => 'sessions#destroy'
   match '/login', :to => 'pages#login'
   match '/about', :to => 'pages#about'
   match '/help', :to => 'pages#help'
