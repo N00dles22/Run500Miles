@@ -1,12 +1,29 @@
-<h1>Run 500 Miles</h1>
+<% if signed_in? %>
+<!--Display personal stats-->
+<h3>
+  You have run
+  <%= pluralize(total_miles(current_user, "week"), "mile") %>
+  this week and have
+  <%= pluralize(miles_left(current_user, "week"), "mile") %>
+  to go!
+</h3>
+<table class="front" summary="For signed-in users">
+    <tr>
+      <td class="main">
+        <h1 class="activity">Log a run!</h1>
+        <%= render 'shared/activity_form' %>
+        <%= render 'shared/feed' %>
+      </td>
+      <td class="sidebar round">
+        <%= render 'shared/user_info' %>
+      </td>
+    </tr>
+  </table>
+  <% else %>
+    <h1>Run 500 Miles</h1>
 <p>
   This is the home page for the
   Run 500 Miles application.
 </p>
-
-<% if signed_in? %>
-<!--Display personal stats-->
-Your personal stats will show up here once I've implemented them!
-  <% else %>
 <%= link_to "Sign up now!", signup_path, :class => "signup_button round" %>
 <% end %>

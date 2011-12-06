@@ -168,6 +168,45 @@ describe User do
     end
   end
   
+  describe "activity associations" do
+
+    before(:each) do
+      @user = User.create(@attr)
+      @ac1 = Factory(:activity, :user => @user, :created_at => 1.day.ago)
+      @ac2 = Factory(:activity, :user => @user, :created_at => 1.hour.ago)
+    end
+
+    it "should have an activities attribute" do
+      @user.should respond_to(:activities)
+    end
+    
+    it "should have the right activities in the right order" do
+      @user.activities.should == [@ac2, @ac1]
+    end
+    
+    it "should destroy associated activities" do
+      @user.destroy
+      [@ac1, @ac2].each do |activity|
+        Activity.find_by_id(activity.id).should be_nil
+      end
+    end
+    
+    it "should have a feed" do
+      @user.should respond_to(:feed)
+    end
+    
+    it "should include the user's activities" do
+      @user.feed.include?(@ac1).should be_true
+      @user.feed.include?(@ac2).should be_true
+    end
+    
+    it "should not include a different user's activities" do
+      ac3 = Factory(:activity,
+                    :user => Factory(:user, :email => Factory.next(:email)))
+      @user.feed.include?(ac3).should be_false
+    end
+  end
+  
 end
 
 # == Schema Information

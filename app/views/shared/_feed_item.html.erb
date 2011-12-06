@@ -1,0 +1,28 @@
+<tr>
+  <td class="gravatar">
+    <%= link_to gravatar_for(feed_item.user), feed_item.user %>
+  </td>
+  <td class="activity">
+    <span class="user">
+      <%= link_to "#{feed_item.user.fname} #{feed_item.user.lname}", feed_item.user %>
+    </span>
+    <span class="content">
+      ran <%= pluralize(feed_item.distance, "mile") %> in <%= pluralize(feed_item.hours, "hour") %>,
+      <%= pluralize(feed_item.minutes, "minute") %> on
+      <%= feed_item.activity_date.strftime("%B %e, %Y") %><br />
+      <% if !feed_item.comment.nil? %>
+        <%= feed_item.comment %>
+      <% end %>
+    </span>
+    <span class="timestamp">
+      Logged <%= time_ago_in_words(feed_item.created_at) %> ago.
+    </span>
+  </td>
+  <% if current_user?(feed_item.user) %>
+    <td>
+      <%= link_to "delete", feed_item, :method => :delete,
+                                       :confirm => "Are you sure?",
+                                       :title => feed_item.comment %>
+    </td>
+  <% end %>
+</tr>

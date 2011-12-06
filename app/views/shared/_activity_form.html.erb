@@ -1,0 +1,27 @@
+<%= form_for (@activity) do |f| %>
+  <%= render 'shared/error_messages', :object => f.object %>
+  <div class="field">
+    <%= f.label :activity_date, "Date of Activity" %><br />
+    <%= date_select(:activity, :activity_date, :default => Date.today,
+      :start_year => 2011, :end_year => 2012, :order => [:month, :day, :year]) %>
+  </div>
+  <div class="field">
+    <%= f.label :distance, "Distance" %><br />
+    <%=f.text_field :distance %>
+  </div>
+  <div class="field">
+    <%= f.label :hours %><br />
+    <%=f.text_field :hours %>
+  </div>
+  <div class="field">
+    <%= f.label :minutes %><br />
+    <%=f.text_field :minutes %>
+  </div>
+  <div class="field">
+    <%= f.label :comment %><br />
+    <%=f.text_field :comment %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Submit" %>
+  </div>
+<% end %>

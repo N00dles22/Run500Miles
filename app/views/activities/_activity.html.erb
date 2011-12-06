@@ -1,0 +1,29 @@
+<tr>
+  <td class="activity">
+    <span class="content">
+      <%=activity.user.fname %> ran <%= pluralize(activity.distance, "mile") %> in
+      <% if activity.hours > 0 %>
+        <%= pluralize(activity.hours, "hour") %>
+      <% end %>
+      <% if activity.hours > 0 && activity.minutes > 0 %>, <% end %>
+      <% if activity.minutes > 0 %>
+        <%= pluralize(activity.minutes, "minute") %>
+      <% end %>
+      on
+      <%= activity.activity_date.strftime("%B %e, %Y") %><br />
+      <% if !activity.comment.nil? %>
+        <%= activity.comment %>
+      <% end %>
+    </span>
+    <span class="timestamp">
+      Logged <%= time_ago_in_words(activity.created_at) %> ago.
+    </span>
+  </td>
+  <% if current_user?(activity.user) %>
+  <td>
+    <%= link_to "delete", activity, :method => :delete,
+                                     :confirm => "Are you sure?",
+                                     :title => activity.comment %>
+  </td>
+  <% end %>
+</tr>
