@@ -12,7 +12,7 @@
       on
       <%= activity.activity_date.strftime("%B %e, %Y") %><br />
       <% if !activity.comment.nil? %>
-        <%= activity.comment %>
+        <%= wrap(activity.comment) %>
       <% end %>
     </span>
     <span class="timestamp">

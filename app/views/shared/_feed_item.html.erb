@@ -11,7 +11,7 @@
       <%= pluralize(feed_item.minutes, "minute") %> on
       <%= feed_item.activity_date.strftime("%B %e, %Y") %><br />
       <% if !feed_item.comment.nil? %>
-        <%= feed_item.comment %>
+        <%= wrap(feed_item.comment) %>
       <% end %>
     </span>
     <span class="timestamp">

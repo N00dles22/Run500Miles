@@ -1,4 +1,4 @@
-<%= form_for (@activity) do |f| %>
+<%= form_for (@activity, :html => {:name => "new_activity"}) do |f| %>
   <%= render 'shared/error_messages', :object => f.object %>
   <div class="field">
     <%= f.label :activity_date, "Date of Activity" %><br />
@@ -19,7 +19,9 @@
   </div>
   <div class="field">
     <%= f.label :comment %><br />
-    <%=f.text_field :comment %>
+    <%=f.text_area :comment, :onkeydown => "textCounter(document.new_activity.activity[comment],document.new_activity.remCount,140)", 
+    :onkeyup => "textCounter(document.new_activity.activity[comment],document.new_activity.remCount,140)" %><br />
+    <!--<input readonly type="text" name="remCount" size="3" maxlength="3" value="140" visible="false"> characters left-->
   </div>
   <div class="actions">
     <%= f.submit "Submit" %>
