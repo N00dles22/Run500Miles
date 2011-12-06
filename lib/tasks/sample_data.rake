@@ -21,5 +21,13 @@ namespace :db do
     #               :password_confirmation => password,
     #               :secret_word => "angusbeef")
     #end
+    
+    50.times do
+      User.all(:limit => 6).each do |user|
+        user.activities.create!(:comment => Faker::Lorem.sentence(5), :activity_date => Date.yesterday,
+                                :distance => 2.0, :hours => 0, :minutes => 30)
+        
+      end
+    end
   end
 end

@@ -16,6 +16,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @activities = @user.activities.paginate(:page => params[:page])
     @title = @user.fname
   end
   
@@ -66,9 +67,6 @@ class UsersController < ApplicationController
   end
   
   private
-    def authenticate
-      deny_access unless signed_in?
-    end
     
     def signed_in
       redirect_to(root_path) unless !signed_in?

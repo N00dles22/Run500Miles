@@ -85,6 +85,17 @@ describe UsersController do
       get :show, :id => @user
       response.should have_selector("h1>img", :class => "gravatar")
     end
+    
+    it "should show the user's activities" do
+      ac1 = Factory(:activity, :user => @user, :activity_date => Date.today,
+                    :distance => 5.0, :hours => 1, :minutes => 27)
+      ac2 = Factory(:activity, :user => @user, :activity_date => Date.yesterday,
+                    :distance => 1.0, :hours => 0, :minutes => 14)
+      get :show, :id => @user
+      response.should have_selector("span.content", :content => ac1.distance)
+      response.should have_selector("span.content", :content => ac2.distance)
+    end
+    
   end
 
   describe "GET 'signup'" do

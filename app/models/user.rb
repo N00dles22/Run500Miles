@@ -19,6 +19,8 @@ class User < ActiveRecord::Base
                   :password, :password_confirmation,
                   :secret_word
   
+  has_many :activities, :dependent => :destroy
+  
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   sw_regex = /\Aangusbeef\z/i
   
@@ -55,6 +57,10 @@ class User < ActiveRecord::Base
   def self.authenticate_with_salt(id, cookie_salt)
     user = find_by_id(id)
     (user && user.salt == cookie_salt) ? user : nil
+  end
+  
+  def feed
+    Activity.where("user_id = ?", id)
   end
   
   private

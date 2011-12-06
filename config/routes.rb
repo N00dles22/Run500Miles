@@ -10,6 +10,7 @@ Run500Miles::Application.routes.draw do
   #get "pages/about"
   resources :users
   resources :sessions, :only => [:new, :create, :destroy]
+  resources :activities, :only => [:create, :destroy]
   
   match '/contact', :to => 'pages#contact'
   match '/profile', :to => 'pages#profile'
