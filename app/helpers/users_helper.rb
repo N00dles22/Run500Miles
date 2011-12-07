@@ -22,18 +22,35 @@ module UsersHelper
     m_left = [total - total_miles(user, timespan), 0].max
   end
   
+  def total_time_s(user, timespan)
+    total_hours = total_time(user, timespan)
+    hours = total_hours.to_i
+    minutes = ((total_hours - hours.to_f) * 60).to_i
+    time_s = ""
+    if (hours > 0)
+      time_s += pluralize(hours, "hour")
+    end
+    if (hours > 0 && minutes > 0)
+      time_s += ", "
+    end
+    if (minutes > 0)
+      time_s += pluralize(minutes, "minutes")
+    end
+    time_s
+  end
+  
   def total_time(user, timespan)
     case timespan
     when "year"
       total_hours = user.activities.sum(:hours)
       total_minutes = user.activities.sum(:minutes)
-      total = total_hours + (total_minutes/60)
+      total = total_hours.to_f + (total_minutes.to_f/60)
     when "week"
       total_hours = user.activities.sum(:hours,
                                         :conditions => ['activity_date >= ?', (Date.today - Date.today.wday)])
       total_minutes = user.activities.sum(:minutes,
                                         :conditions => ['activity_date >= ?', (Date.today - Date.today.wday)])
-      total = total_hours + (total_minutes /60)
+      total = total_hours.to_f + (total_minutes.to_f/60)
     end
     
   end

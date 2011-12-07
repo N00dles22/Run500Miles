@@ -11,15 +11,15 @@
   <br />
     <strong>Total for Year</strong><br />
     <span class="activities">
-      <%= pluralize(total_miles(object, "year"), "mile") %> in 
-      <%= pluralize(total_time(object, "year"), "hour") %>
+      <%= pluralize(total_miles(object, "year"), "mile") %> in<br /> 
+      <%= total_time_s(object, "year") %>
     </span>
     <br />
     <br />
     <strong>Total this Week</strong><br />
     <span class="activities">
-      <%= pluralize(total_miles(object, "week"), "mile") %> in 
-      <%= pluralize(total_time(object, "week"), "hour") %>
+      <%= pluralize(total_miles(object, "week"), "mile") %> in <br />
+      <%= total_time_s(object, "week") %>
     </span>
     <br />
     <br />
