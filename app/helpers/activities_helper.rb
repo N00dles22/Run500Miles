@@ -2,6 +2,17 @@ module ActivitiesHelper
   def wrap(content)
     sanitize(raw(content.split.map{ |s| wrap_long_string(s) }.join(' ')))
   end
+  
+  def activity_type_s(a_type)
+    case a_type
+    when "1"
+      "ran"
+    when "2"
+      "walked"
+    when "3"
+      "ran/walked"
+    end
+  end
 
   private
 

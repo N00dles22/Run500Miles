@@ -11,6 +11,8 @@
 #  minutes       :integer
 #  created_at    :datetime
 #  updated_at    :datetime
+#  location      :string(255)     default("home")
+#  activity_type :string(255)     default("run/walk")
 #
 
 require 'spec_helper'

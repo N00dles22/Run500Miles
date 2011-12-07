@@ -11,11 +11,13 @@
 #  minutes       :integer
 #  created_at    :datetime
 #  updated_at    :datetime
+#  location      :string(255)     default("")
+#  activity_type :string(255)     default("3")
 #
 
 class Activity < ActiveRecord::Base
   attr_accessible :comment, :activity_date, :distance,
-                  :hours, :minutes
+                  :hours, :minutes, :activity_type, :location
                   
   belongs_to :user
   
@@ -27,6 +29,8 @@ class Activity < ActiveRecord::Base
                             :numericality => { :greater_than_or_equal_to => 0}
   validates :minutes,       :presence => true,
                             :numericality => { :greater_than_or_equal_to => 0}
+  validates :activity_type, :presence => true
+  validates :location,      :length => { :maximum => 140 }
   validates :comment,       :length => { :maximum => 140 }
   validate :validate_non_zero_time
   validate :validate_activity_date

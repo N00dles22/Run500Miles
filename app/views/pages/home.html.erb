@@ -1,7 +1,7 @@
 <% if signed_in? %>
 <!--Display personal stats-->
 <h3>
-  You have run
+  You have gone
   <%= pluralize(total_miles(current_user, "week"), "mile") %>
   this week and have
   <%= pluralize(miles_left(current_user, "week"), "mile") %>

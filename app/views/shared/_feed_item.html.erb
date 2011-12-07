@@ -7,11 +7,14 @@
       <%= link_to "#{feed_item.user.fname} #{feed_item.user.lname}", feed_item.user %>
     </span>
     <span class="content">
-      ran <%= pluralize(feed_item.distance, "mile") %> in <%= pluralize(feed_item.hours, "hour") %>,
+      <%= activity_type_s(feed_item.activity_type) %> <%= pluralize(feed_item.distance, "mile") %> in <%= pluralize(feed_item.hours, "hour") %>,
       <%= pluralize(feed_item.minutes, "minute") %> on
       <%= feed_item.activity_date.strftime("%B %e, %Y") %><br />
-      <% if !feed_item.comment.nil? %>
-        <%= wrap(feed_item.comment) %>
+      <% if !feed_item.location.blank? %>
+        <strong>Location: </strong><%= wrap(feed_item.location) %><br />
+      <% end %>
+      <% if !feed_item.comment.blank? %>
+        <strong>Comment: </strong><%= wrap(feed_item.comment) %>
       <% end %>
     </span>
     <span class="timestamp">

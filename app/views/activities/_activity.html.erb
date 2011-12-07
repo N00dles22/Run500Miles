@@ -1,7 +1,7 @@
 <tr>
   <td class="activity">
     <span class="content">
-      <%=activity.user.fname %> ran <%= pluralize(activity.distance, "mile") %> in
+      <%=activity.user.fname %> <%=activity_type_s(activity.activity_type) %> <%= pluralize(activity.distance, "mile") %> in
       <% if activity.hours > 0 %>
         <%= pluralize(activity.hours, "hour") %>
       <% end %>
@@ -11,8 +11,11 @@
       <% end %>
       on
       <%= activity.activity_date.strftime("%B %e, %Y") %><br />
-      <% if !activity.comment.nil? %>
-        <%= wrap(activity.comment) %>
+      <% if !activity.location.blank? %>
+        <strong>Location: </strong><%= wrap(activity.location) %><br />
+      <% end %>
+      <% if !activity.comment.blank? %>
+        <strong>Comment: </strong><%= wrap(activity.comment) %>
       <% end %>
     </span>
     <span class="timestamp">

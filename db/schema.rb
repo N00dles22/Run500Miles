@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111205033220) do
+ActiveRecord::Schema.define(:version => 20111207053835) do
 
   create_table "activities", :force => true do |t|
     t.string   "comment"
@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(:version => 20111205033220) do
     t.integer  "minutes"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "location",      :default => "home"
+    t.string   "activity_type", :default => "run/walk"
   end
 
   add_index "activities", ["user_id", "created_at"], :name => "index_activities_on_user_id_and_created_at"
