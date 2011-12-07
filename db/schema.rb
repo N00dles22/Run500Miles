@@ -10,35 +10,36 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111207182433) do
+ActiveRecord::Schema.define(:version => 20111207233522) do
 
   create_table "activities", :force => true do |t|
-    t.string   "comment"
-    t.integer  "user_id"
-    t.date     "activity_date"
-    t.float    "distance"
-    t.integer  "hours"
-    t.integer  "minutes"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "location",      :default => "home"
-    t.string   "activity_type", :default => "run/walk"
+    t.string    "comment"
+    t.integer   "user_id"
+    t.date      "activity_date"
+    t.float     "distance"
+    t.integer   "hours"
+    t.integer   "minutes"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+    t.string    "location",      :default => ""
+    t.string    "activity_type", :default => "3"
   end
 
   add_index "activities", ["user_id", "created_at"], :name => "index_activities_on_user_id_and_created_at"
 
   create_table "users", :force => true do |t|
-    t.string   "email"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "fname"
-    t.string   "lname"
-    t.string   "encrypted_password"
-    t.string   "salt"
-    t.boolean  "admin",              :default => false
-    t.string   "user_type",          :default => "2"
+    t.string    "email"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+    t.string    "fname"
+    t.string    "lname"
+    t.string    "encrypted_password"
+    t.string    "salt"
+    t.boolean   "admin",              :default => false
+    t.string    "user_type",          :default => "2"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["user_type"], :name => "index_users_on_user_type"
 
 end
