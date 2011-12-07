@@ -29,4 +29,8 @@
       <%= pluralize(miles_left(object, "week"), "mile") %> left this <strong>week</strong>
     </span>
     <br />
+    <% if current_user.admin? %>
+      <strong>User Type</strong><br />
+      <%= object.user_type %>
+    <% end %>
   </div>

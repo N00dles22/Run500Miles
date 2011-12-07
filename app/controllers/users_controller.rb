@@ -1,8 +1,9 @@
 class UsersController < ApplicationController
   before_filter :authenticate, :only => [:index, :edit, :update, :destroy]
   before_filter :correct_user, :only => [:edit, :update]
-  before_filter :admin_user, :only => :destroy
+  before_filter :admin_user, :only => [:destroy]
   before_filter :signed_in,:only => [:signup, :create]
+  before_filter :same_user_type, :only => [:show]
   
   def signup
     @user = User.new
@@ -11,7 +12,14 @@ class UsersController < ApplicationController
 
   def index
     @title = "All Users"
-    @users = User.paginate(:page => params[:page])
+    if current_user.admin?
+      @users = User.paginate(:page => params[:page])
+    else
+      @viewable_user_types = current_user.user_type.split('|')
+      @viewable_user_types.push current_user.user_type
+      @users = User.find(:all, :conditions =>
+                        ["user_type IN (?)", @viewable_user_types]).paginate(:page => params[:page])
+    end
   end
 
   def show
@@ -42,11 +50,20 @@ class UsersController < ApplicationController
   
   def update
     @user = User.find(params[:id])
-    @user.secret_word = "angusbeef"
+    #@user.secret_word = "angusbeef"
     if @user.update_attributes(params[:user])
       flash[:success] = "Profile updated."
-      redirect_to @user
-    else
+      if current_user.admin?
+        redirect_to users_path
+      else
+        redirect_to @user
+      end
+    #else if (@user.update_attribute_with_validation_skipping(:user_type, params[:user_type]) and current_user.admin?)
+     # redirect_to root_path
+    elsif @user.update_attribute(:user_type, params[:user_type]) and current_user.admin?
+      flash[:success] = "User updated."
+      redirect_to users_path
+    else    
       @title = "Edit User"
       @user.password = ""
       @user.password_confirmation = ""
@@ -60,7 +77,7 @@ class UsersController < ApplicationController
       flash[:error] = "You may not destroy yourself"
     else
       User.find(params[:id]).destroy
-    flash[:success] = "User destroyed"
+      flash[:success] = "User destroyed"
     end
     
     redirect_to users_path
@@ -74,11 +91,16 @@ class UsersController < ApplicationController
     
     def correct_user
       @user = User.find(params[:id])
-      redirect_to(root_path) unless current_user?(@user)
+      redirect_to(root_path) unless current_user?(@user) or current_user.admin?
     end
     
     def admin_user
       redirect_to(root_path) unless current_user.admin?
+    end
+    
+    def same_user_type
+      @user = User.find(params[:id])
+      redirect_to(root_path) unless current_user.user_type.include?(@user.user_type)
     end
 
 end

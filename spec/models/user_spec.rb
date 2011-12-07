@@ -209,6 +209,7 @@ describe User do
   
 end
 
+
 # == Schema Information
 #
 # Table name: users
@@ -222,5 +223,6 @@ end
 #  encrypted_password :string(255)
 #  salt               :string(255)
 #  admin              :boolean         default(FALSE)
+#  user_type          :string(255)     default("2")
 #
 

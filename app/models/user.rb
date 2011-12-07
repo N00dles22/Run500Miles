@@ -1,23 +1,8 @@
-# == Schema Information
-#
-# Table name: users
-#
-#  id                 :integer         not null, primary key
-#  email              :string(255)
-#  created_at         :datetime
-#  updated_at         :datetime
-#  fname              :string(255)
-#  lname              :string(255)
-#  encrypted_password :string(255)
-#  salt               :string(255)
-#  admin              :boolean         default(FALSE)
-#
-
 class User < ActiveRecord::Base
   attr_accessor :password, :secret_word
   attr_accessible :fname, :lname, :email,
                   :password, :password_confirmation,
-                  :secret_word
+                  :secret_word, :user_type
   
   has_many :activities, :dependent => :destroy
   
@@ -37,7 +22,9 @@ class User < ActiveRecord::Base
                         :length       => { :within => 6..40 }
                         
   validates :secret_word, :presence => true,
-                          :format => { :with => sw_regex }
+                          :format => { :with => sw_regex },
+                          :on => :create
+                          
   
   before_save :encrypt_password
   
@@ -82,4 +69,21 @@ class User < ActiveRecord::Base
     end
 end
 
+
+
+# == Schema Information
+#
+# Table name: users
+#
+#  id                 :integer         not null, primary key
+#  email              :string(255)
+#  created_at         :datetime
+#  updated_at         :datetime
+#  fname              :string(255)
+#  lname              :string(255)
+#  encrypted_password :string(255)
+#  salt               :string(255)
+#  admin              :boolean         default(FALSE)
+#  user_type          :string(255)     default("2")
+#
 

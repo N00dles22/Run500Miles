@@ -18,6 +18,28 @@ module UsersHelper
     end
   end
   
+  def toggle_family(user)
+    #@user =  User.find(params[:id])
+    @user_types = user.user_type.split('|')
+    if (@user_types.include?("1"))
+      @user_types.delete("1")
+    else
+      @user_types.push("1")
+    end
+    @user_types.join("|")
+  end
+  
+  def toggle_friend(user)
+    #@user =  User.find(params[:id])
+    @user_types = user.user_type.split('|')
+    if (@user_types.include?("2"))
+      @user_types.delete("2")
+    else
+      @user_types.push("2")
+    end
+    @user_types.join("|")
+  end
+  
   def miles_left(user, timespan)
     total = timespan == "year" ? 500 : 10
     m_left = format("%0.2f", [total - total_miles(user, timespan), 0].max).to_f
