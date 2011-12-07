@@ -14,9 +14,7 @@
       <% end %>
     </td>
     <td class="sidebar round">
-      <strong>Name</strong> <%= "#{@user.fname} #{@user.lname}" %><br />
-      <strong>URL</strong>  <%= link_to user_path(@user), @user %><br />
-      <strong>Runs Logged</strong> <%= @user.activities.count %>
+        <%= render 'shared/user_info', :object => @user %>
     </td>
   </tr>
 </table>

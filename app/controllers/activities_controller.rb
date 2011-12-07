@@ -1,6 +1,11 @@
 class ActivitiesController < ApplicationController
-  before_filter :authenticate, :only => [:create, :destroy]
-  before_filter :authorized_user, :only => :destroy
+  before_filter :authenticate, :only => [:create, :destroy, :edit, :update]
+  before_filter :authorized_user, :only => [:edit, :update, :destroy]
+  
+  def new
+    @title = "Log a Run"
+    @activity = current_user.activities.build(params[:activity])
+  end
   
   def create
     @activity = current_user.activities.build(params[:activity])
@@ -10,6 +15,30 @@ class ActivitiesController < ApplicationController
     else
       @feed_items = []
       render 'pages/home'
+    end
+  end
+  
+  def edit
+    @title = "Edit Activity"
+    @activity = Activity.find(params[:id])
+  end
+  
+  def show
+    @activity = Activity.find(params[:id])
+  end
+  
+  def index
+    @activities = current_user.activities
+  end
+  
+  def update
+    @activity = Activity.find(params[:id])
+    if @activity.update_attributes(params[:activity])
+      flash[:success] = "Activity updated."
+      redirect_back_or root_path
+    else
+      @title = "Edit Activity"
+      render 'edit'
     end
   end
 

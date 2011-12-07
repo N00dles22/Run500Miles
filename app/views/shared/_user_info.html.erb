@@ -1,28 +1,32 @@
 <div class="user_info">
-  <a href="<%= user_path(current_user) %>">
-    <%= gravatar_for current_user, :size => 30 %>
-    <span class="user_name">
-      <%= "#{current_user.fname} #{current_user.lname}" %>
-    </span><br />
-    <span class="activities">
-      <%= pluralize(current_user.activities.count, "activity") %><br />
-      
-    </span>
-    <span class="">Totals</span><br />
-    <span class="activities">
-      <%= pluralize(total_miles(current_user, "year"), "mile") %> in 
-      <%= pluralize(total_time(current_user, "year"), "hour") %><br />
-      
-    </span>
-    <span class="">This Week</span><br />
-    <span class="activities">
-      <%= pluralize(total_miles(current_user, "week"), "mile") %> in 
-      <%= pluralize(total_time(current_user, "week"), "hour") %><br />
-    </span>
-    <span class="">Mileage Remaining</span><br />
-    <span class="activities">
-      <%= pluralize(miles_left(current_user, "year"), "mile") %><br /> 
-      <%= pluralize(miles_left(current_user, "week"), "mile") %>
-    </span>
+  <a href="<%= user_path(object) %>">
+    <%= gravatar_for object, :size => 30 %>
+    <strong><%= "#{object.fname} #{object.lname}" %></strong><br />    
   </a>
-</div>
+  <br />
+  <br />
+  <!--<strong>URL</strong>  <%= link_to user_path(object), object %><br />-->
+  <strong>Runs Logged</strong> <%= object.activities.count %>
+  <br />
+  <br />
+    <strong>Total for Year</strong><br />
+    <span class="activities">
+      <%= pluralize(total_miles(object, "year"), "mile") %> in 
+      <%= pluralize(total_time(object, "year"), "hour") %>
+    </span>
+    <br />
+    <br />
+    <strong>Total this Week</strong><br />
+    <span class="activities">
+      <%= pluralize(total_miles(object, "week"), "mile") %> in 
+      <%= pluralize(total_time(object, "week"), "hour") %>
+    </span>
+    <br />
+    <br />
+    <strong>Mileage Remaining</strong><br />
+    <span class="activities">
+      <%= pluralize(miles_left(object, "year"), "mile") %> left this <strong>year</strong><br /> 
+      <%= pluralize(miles_left(object, "week"), "mile") %> left this <strong>week</strong>
+    </span>
+    <br />
+  </div>

@@ -10,18 +10,21 @@ Run500Miles::Application.routes.draw do
   #get "pages/about"
   resources :users
   resources :sessions, :only => [:new, :create, :destroy]
-  resources :activities, :only => [:create, :destroy]
+  resources :activities #, :only => [:create, :destroy, :edit]
   
   match '/contact', :to => 'pages#contact'
-  match '/profile', :to => 'pages#profile'
-  match '/log_run', :to => 'pages#log_run'
+  #match '/profile', :to => 'pages#profile'
+  #match '/log_run', :to => 'pages#log_run'
   match '/signup', :to => 'users#signup'
   match '/signin', :to => 'sessions#new'
   match '/signout', :to => 'sessions#destroy'
-  match '/login', :to => 'pages#login'
+  #match '/login', :to => 'pages#login'
   match '/about', :to => 'pages#about'
   match '/help', :to => 'pages#help'
-
+  # You can have the root of your site routed with "root"
+  # just remember to delete public/index.html.
+  root :to => "pages#home"
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -69,9 +72,7 @@ Run500Miles::Application.routes.draw do
   #     resources :products
   #   end
 
-  # You can have the root of your site routed with "root"
-  # just remember to delete public/index.html.
-  root :to => "pages#home"
+  
 
   # See how all your routes lay out with "rake routes"
 

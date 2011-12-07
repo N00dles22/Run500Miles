@@ -7,15 +7,15 @@
   <%= pluralize(miles_left(current_user, "week"), "mile") %>
   to go!
 </h3>
+<%= link_to "Log a run!", new_activity_path, :class => "log_run_button round" %>
+
 <table class="front" summary="For signed-in users">
     <tr>
       <td class="main">
-        <h1 class="activity">Log a run!</h1>
-        <%= render 'shared/activity_form' %>
         <%= render 'shared/feed' %>
       </td>
       <td class="sidebar round">
-        <%= render 'shared/user_info' %>
+        <%= render 'shared/user_info', :object => current_user %>
       </td>
     </tr>
   </table>

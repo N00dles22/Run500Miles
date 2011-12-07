@@ -1,0 +1,32 @@
+<h1>Edit Activity</h1>
+
+<%= form_for (@activity, :html => {:name => "update_activity"}) do |f| %>
+  <%= render 'shared/error_messages', :object => f.object %>
+  <div class="field">
+    <%= f.label :activity_date, "Date of Activity" %><br />
+    <%= date_select(:activity, :activity_date, :default => Date.today,
+      :start_year => 2011, :end_year => 2012, :order => [:month, :day, :year]) %>
+  </div>
+  <div class="field">
+    <%= f.label :distance, "Distance" %><br />
+    <%=f.text_field :distance %>
+  </div>
+  <div class="field">
+    <%= f.label :hours %><br />
+    <%=f.text_field :hours %>
+  </div>
+  <div class="field">
+    <%= f.label :minutes %><br />
+    <%=f.text_field :minutes %>
+  </div>
+  <div class="field">
+    <%= f.label :comment %><br />
+    <%=f.text_area :comment, :onkeydown => "textCounter(document.new_activity.activity[comment],document.new_activity.remCount,140)", 
+    :onkeyup => "textCounter(document.new_activity.activity[comment],document.new_activity.remCount,140)" %><br />
+    <!--<input readonly type="text" name="remCount" size="3" maxlength="3" value="140" visible="false"> characters left-->
+  </div>
+  <div class="actions">
+    <%= f.submit "Update" %>
+  </div>
+<% end %>
+

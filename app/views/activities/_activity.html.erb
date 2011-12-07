@@ -20,6 +20,9 @@
     </span>
   </td>
   <% if current_user?(activity.user) %>
+    <td>
+      <%= link_to "edit", edit_activity_path(activity) %>
+    </td>
   <td>
     <%= link_to "delete", activity, :method => :delete,
                                      :confirm => "Are you sure?",
