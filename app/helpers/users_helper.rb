@@ -20,6 +20,10 @@ module UsersHelper
   
   def toggle_family(user)
     #@user =  User.find(params[:id])
+    if user.user_type.nil?
+      return "1"  
+    end
+    
     @user_types = user.user_type.split('|')
     if (@user_types.include?("1"))
       @user_types.delete("1")
@@ -30,6 +34,9 @@ module UsersHelper
   end
   
   def toggle_friend(user)
+    if user.user_type.nil?
+      return "2"  
+    end
     #@user =  User.find(params[:id])
     @user_types = user.user_type.split('|')
     if (@user_types.include?("2"))
