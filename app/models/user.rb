@@ -33,6 +33,37 @@ class User < ActiveRecord::Base
     encrypted_password == encrypt(submitted_password)
   end
   
+  def total_miles(timespan)
+    case timespan
+    when "year"
+      total = activities.sum(:distance)
+    when "week"
+      total = activities.sum(:distance,
+                                  :conditions => ['activity_date >= ?',
+                                                  (Date.today - Date.today.wday)])
+    end
+  end
+  
+  def total_time(timespan)
+    case timespan
+    when "year"
+      total_hours = activities.sum(:hours)
+      total_minutes = activities.sum(:minutes)
+      total = total_hours.to_f + (total_minutes.to_f/60)
+    when "week"
+      total_hours = activities.sum(:hours,
+                                        :conditions => ['activity_date >= ?', (Date.today - Date.today.wday)])
+      total_minutes = activities.sum(:minutes,
+                                        :conditions => ['activity_date >= ?', (Date.today - Date.today.wday)])
+      total = total_hours.to_f + (total_minutes.to_f/60)
+    end
+  end
+  
+  def miles_left(timespan)
+    total = timespan == "year" ? 500 : 10
+    m_left = format("%0.2f", [total - total_miles(timespan), 0].max).to_f
+  end
+  
   def self.authenticate(email, submitted_password)
     #user = find_by_email(email)
     #updated user find is case insensitive, which is what we want!

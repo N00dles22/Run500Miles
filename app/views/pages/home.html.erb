@@ -1,12 +1,13 @@
 <% if signed_in? %>
 <!--Display personal stats-->
-<h3>
+<h3 align="center">
   You have gone
-  <%= pluralize(total_miles(current_user, "week"), "mile") %>
+  <%= pluralize(current_user.total_miles("week"), "mile") %>
   this week and have
-  <%= pluralize(miles_left(current_user, "week"), "mile") %>
+  <%= pluralize(current_user.miles_left("week"), "mile") %>
   to go!
 </h3>
+<br />
 <%= link_to "Log a run!", new_activity_path, :class => "log_run_button round" %>
 
 <table class="front" summary="For signed-in users">
