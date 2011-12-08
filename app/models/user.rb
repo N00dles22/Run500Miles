@@ -45,7 +45,7 @@ class User < ActiveRecord::Base
   end
   
   def can_view_user?(other_user)
-    if (admin? || id = other_user.id)
+    if (admin?)
       return true
     elsif (user_type.nil? || other_user.user_type.nil?)
       return false
