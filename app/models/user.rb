@@ -34,7 +34,10 @@ class User < ActiveRecord::Base
   end
   
   def self.authenticate(email, submitted_password)
-    user = find_by_email(email)
+    #user = find_by_email(email)
+    #updated user find is case insensitive, which is what we want!
+    user = User.find(:all, :conditions =>
+                     ["LOWER(email) = ?", email.downcase])[0]
     (user && user.has_password?(submitted_password)) ? user : nil
     #return nil if user.nil?
     #return user if user.has_password?(submitted_password)
