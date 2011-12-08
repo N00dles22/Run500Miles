@@ -16,9 +16,11 @@ class UsersController < ApplicationController
       @users = User.paginate(:page => params[:page])
     else
       @viewable_user_types = current_user.user_type.split('|')
-      @viewable_user_types.push current_user.user_type
+      # ensure they can see people in both groups...
+      @viewable_user_types.push("1|2")
+      @viewable_user_types.push("2|1")
       @users = User.find(:all, :conditions =>
-                        ["user_type IN (?)", @viewable_user_types]).paginate(:page => params[:page])
+                        ["user_type IN (?) or admin=?", @viewable_user_types, true]).paginate(:page => params[:page])
     end
   end
 
@@ -51,6 +53,9 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     #@user.secret_word = "angusbeef"
+    if (!params[:user].nil?)
+      params[:user].merge({:user_type => @user.user_type})
+    end
     if @user.update_attributes(params[:user])
       flash[:success] = "Profile updated."
       if current_user.admin?
@@ -58,10 +63,10 @@ class UsersController < ApplicationController
       else
         redirect_to @user
       end
-    #else if (@user.update_attribute_with_validation_skipping(:user_type, params[:user_type]) and current_user.admin?)
-     # redirect_to root_path
-    elsif @user.update_attribute(:user_type, params[:user_type]) and current_user.admin?
-      flash[:success] = "User updated."
+    elsif current_user.admin?
+      if User.update_all({:user_type => params[:user_type]}, {:id => @user.id})
+        flash[:success] = "User updated."        
+      end
       redirect_to users_path
     else    
       @title = "Edit User"
@@ -85,6 +90,7 @@ class UsersController < ApplicationController
   
   private
     
+            
     def signed_in
       redirect_to(root_path) unless !signed_in?
     end
@@ -100,7 +106,13 @@ class UsersController < ApplicationController
     
     def same_user_type
       @user = User.find(params[:id])
-      redirect_to(root_path) unless current_user.user_type.include?(@user.user_type)
+      if (!current_user.admin?)
+        if (current_user.user_type.nil? || @user.user_type.nil?)
+          redirect_to(root_path)
+        else
+          redirect_to(root_path) unless current_user.user_type.include?(@user.user_type)
+        end      
+      end
     end
 
 end

@@ -2,12 +2,16 @@
   <%= gravatar_for user, :size => 30 %>
   <%= link_to "#{user.fname} #{user.lname}", user %>
   <% if current_user.admin? %>
-    <%= link_to "edit", edit_user_path(user) %>
-    <%= link_to (user.user_type.nil? ? "family" : (user.user_type.include?("1") ? "family" : "not family")),
-         user_path(user, :user_type => toggle_family(user)), :method => :put %>
-    <%= link_to (user.user_type.nil? ? "friend" : (user.user_type.include?("2") ? "friend" : "not friend")),
-         user_path(user, :user_type => toggle_friend(user)), :method => :put %>
-    <%= link_to "delete", user, :method => :delete, :confirm => "Are you sure?",
-                                :title => "Delete #{user.fname} #{user.lname}" %>
+    <nav class="round">
+      <ul>
+        <li><%= link_to "edit", edit_user_path(user) %></li>
+        <li><%= link_to (user.user_type.nil? ? "family" : (user.user_type.include?("1") ? "family" : "not family")),
+            user_path(user, :user_type => toggle_family(user)), :method => :put %></li>
+        <li><%= link_to (user.user_type.nil? ? "friend" : (user.user_type.include?("2") ? "friend" : "not friend")),
+             user_path(user, :user_type => toggle_friend(user)), :method => :put %></li>
+        <li><%= link_to "delete", user, :method => :delete, :confirm => "Are you sure?",
+                                    :title => "Delete #{user.fname} #{user.lname}" %></li>
+      </ul>
+    </nav>
   <% end %>                            
 </li>
