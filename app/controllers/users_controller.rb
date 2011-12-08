@@ -14,6 +14,8 @@ class UsersController < ApplicationController
     @title = "All Users"
     if current_user.admin?
       @users = User.paginate(:page => params[:page])
+    elsif current_user.user_type.nil?
+      @users = [ current_user ]
     else
       @viewable_user_types = current_user.user_type.split('|')
       # ensure they can see people in both groups...
@@ -106,13 +108,14 @@ class UsersController < ApplicationController
     
     def same_user_type
       @user = User.find(params[:id])
-      if (!current_user.admin?)
-        if (current_user.user_type.nil? || @user.user_type.nil?)
-          redirect_to(root_path)
-        else
-          redirect_to(root_path) unless current_user.user_type.include?(@user.user_type)
-        end      
-      end
+      redirect_to(root_path) unless current_user.can_view_user?(@user)
+      #if (!current_user.admin?)
+      #  if (current_user.user_type.nil? || @user.user_type.nil?)
+      #    redirect_to(root_path)
+      #  else
+      #    redirect_to(root_path) unless current_user.user_type.can_view_user?(@user)
+      #  end      
+      #end
     end
 
 end

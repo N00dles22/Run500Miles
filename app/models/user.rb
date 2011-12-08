@@ -44,6 +44,23 @@ class User < ActiveRecord::Base
     end
   end
   
+  def can_view_user?(other_user)
+    if (admin? || id = other_user.id)
+      return true
+    elsif (user_type.nil? || other_user.user_type.nil?)
+      return false
+    else
+      self_user_types = user_type.split('|')
+      other_user_types = other_user.user_type.split('|')
+      for i in 0...other_user_types.length
+        if self_user_types.include?(other_user_types[i])
+          return true
+        end
+      end
+      return false
+    end
+  end
+  
   def total_time(timespan)
     case timespan
     when "year"
