@@ -1,0 +1,16 @@
+<% unless @weekly_leader_items.empty? %>
+  <br/>
+  <h3>Leaders for the Week</h3>
+  <table class="activities" summary="Weekly Leaders">
+    <%= render :partial => 'shared/leader_item', :collection => @weekly_leader_items %>
+  </table>
+  <%= will_paginate @weekly_leader_items %>
+<% end %>
+<% unless @weekly_leader_items.empty? %>
+  <br/>
+  <h3>Leaders for the Year</h3>
+  <table class="activities" summary="Yearly Leaders">
+    <%= render :partial => 'shared/leader_item', :collection => @yearly_leader_items %>
+  </table>
+  <%= will_paginate @yearly_leader_items %>
+<% end %>

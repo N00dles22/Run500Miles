@@ -98,7 +98,17 @@ class User < ActiveRecord::Base
   end
   
   def feed
-    Activity.where("user_id = ?", id)
+    if (user_type.nil?)
+      Activity.where("user_id = ?", id)
+    else
+      @ids = []
+      User.all.each do |u|
+        if (can_view_user?(u))
+          @ids.push(u.id)
+        end
+      end
+      Activity.where("user_id IN (?)", @ids)
+    end
   end
   
   private

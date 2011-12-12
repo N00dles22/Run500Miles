@@ -1,6 +1,6 @@
 <% unless @feed_items.empty? %>
   <br/>
-  <h3>Your Recent Activity</h3>
+  <h3>Recent Activities</h3>
   <table class="activities" summary="User activities">
     <%= render :partial => 'shared/feed_item', :collection => @feed_items %>
   </table>
