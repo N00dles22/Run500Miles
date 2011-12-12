@@ -14,7 +14,7 @@ class ActivitiesController < ApplicationController
       redirect_to root_path
     else
       @feed_items = []
-      render 'pages/home'
+      render 'new'
     end
   end
   

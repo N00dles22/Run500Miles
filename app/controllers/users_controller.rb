@@ -108,7 +108,7 @@ class UsersController < ApplicationController
     
     def same_user_type
       @user = User.find(params[:id])
-      redirect_to(root_path) unless current_user.can_view_user?(@user)
+      redirect_to(root_path) unless (!current_user.nil? && current_user.can_view_user?(@user))
       #if (!current_user.admin?)
       #  if (current_user.user_type.nil? || @user.user_type.nil?)
       #    redirect_to(root_path)
