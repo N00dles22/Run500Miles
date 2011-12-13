@@ -1,16 +1,40 @@
-<% unless @weekly_leader_items.empty? %>
-  <br/>
-  <h3>Leaders for the Week</h3>
-  <table class="activities" summary="Weekly Leaders">
-    <%= render :partial => 'shared/leader_item', :collection => @weekly_leader_items %>
+<% unless @weekly_leader_items.empty? && @yearly_leader_items.empty? %>
+  <table class="leaderboards">
+    <tr>
+      <% unless @weekly_leader_items.empty? %>
+        <th><h3>Leaders for the Week</h3></td>
+      <% end %>
+      <% unless @yearly_leader_items.empty? %>
+        <th><h3>Leaders for the Year</h3></td>
+      <% end %>
+    </tr>
+    <tr>
+      <% unless @weekly_leader_items.empty? %>
+        <td align="left">
+          <table class="leaderboard round" summary="Weekly Leaders"=>
+            <tr>
+              <th>Rank</th>
+              <th class="leadername">Name</th>
+              <th>Distance<br />(miles)</th>
+              <th>Time<br />(hh:mm)</th>
+            </tr>
+            <%= render :partial => 'shared/leader_item', :collection => @weekly_leader_items %>
+          </table>
+        </td>
+      <% end %>
+      <% unless @yearly_leader_items.empty? %>
+        <td align="right">
+          <table class="leaderboard round" summary="Yearly Leaders">
+            <tr>
+              <th>Rank</th>
+              <th class="leadername">Name</th>
+              <th>Distance<br />(miles)</th>
+              <th>Time<br />(hh:mm)</th>
+            </tr>
+            <%= render :partial => 'shared/leader_item', :collection => @yearly_leader_items %>
+          </table>
+        </td>
+      <% end %>
+    </tr>
   </table>
-  <%= will_paginate @weekly_leader_items %>
-<% end %>
-<% unless @weekly_leader_items.empty? %>
-  <br/>
-  <h3>Leaders for the Year</h3>
-  <table class="activities" summary="Yearly Leaders">
-    <%= render :partial => 'shared/leader_item', :collection => @yearly_leader_items %>
-  </table>
-  <%= will_paginate @yearly_leader_items %>
 <% end %>

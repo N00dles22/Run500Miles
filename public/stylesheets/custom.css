@@ -99,11 +99,12 @@ a.log_run_button {
   display: block;
   text-align: center;
   width: 190px;
-  color: #fff;
-  background: #006400;
+  color: #09c;
+  border: 1px solid #09c;
+  background: #CCFFFF;
   font-size: 150%;
   font-weight: bold;
-  padding: 20px;
+  padding: 5px;
 }
 
 /* Round corners */
@@ -257,4 +258,61 @@ form.new_activity {
 form.new_activity textarea {
   height: 4em;
   margin-bottom: 0;
+}
+
+table.leaderboards{
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+table.leaderboards tr th{
+  text-align: center;
+}
+
+table.leaderboard {
+  border: 1px solid black;
+  width: 95%;
+  padding: 3px;
+}
+
+table.leaderboard tr th {
+  border-bottom: 1px solid black;
+  text-align: left;
+  color: #800000
+}
+
+table.leaderboard tr td {
+  text-align: left;
+}
+
+table.leaderboard tr th.leadername{
+  width: 40%;
+  text-align: left;
+}
+
+table.leaderboard tr.leaderuser td{
+  background-color: #99FFCC;
+  border-bottom: 1px dashed #800000;
+  border-top: 1px dashed #800000;
+  text-align: left;
+  font: bold;
+}
+table.leaderboard tr td.leadername{
+  width: 40%;
+  text-align: left;
+}
+
+a.view_leaderboards_button {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  text-align: center;
+  width: 50%;
+  color: #09c;
+  border: 1px solid #09c;
+  background: #CCFFFF;
+  font-size: 110%;
+  font-weight: bold;
+  padding: 10px;
 }

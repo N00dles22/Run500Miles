@@ -7,19 +7,26 @@
   <%= pluralize(current_user.miles_left("week"), "mile") %>
   to go!
 </h3>
-<br />
-<%= link_to "Log a run!", new_activity_path, :class => "log_run_button round" %>
-
 <table class="front" summary="For signed-in users">
     <tr>
-      <td class="main">
+      <td class="main">    
+        <h3>Recent Activities</h3>
+        <%= link_to "View Current Leaders", root_path + "#leaderboards" %> 
         <%= render 'shared/feed' %>
       </td>
-      <td class="sidebar round">
+      <td class="sidebar round">        
+        <%= link_to "Log a run!", new_activity_path, :class => "log_run_button round" %><br />
         <%= render 'shared/user_info', :object => current_user %>
+        
       </td>
     </tr>
   </table>
+<br />
+<div id="leaderboards">
+<%= link_to "Back to Top", root_path + "#top" %>
+<%= render 'shared/leaderboard' %>
+<%= link_to "Don't see yourself? View the full list!", leaderboards_path, :class => "view_leaderboards_button round" %>
+</div>
   <% else %>
     <h1>Run 500 Miles</h1>
 <p>

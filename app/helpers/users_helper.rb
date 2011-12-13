@@ -37,20 +37,24 @@ module UsersHelper
   end
   
   def total_time_s(user, timespan)
-    total_hours = user.total_time(timespan)
-    hours = total_hours.to_i
-    minutes = ((total_hours - hours.to_f) * 60).to_i
+    @hm = get_hours_mins(user.total_time(timespan))
     time_s = ""
-    if (hours > 0)
-      time_s += pluralize(hours, "hour")
+    if (@hm[0] > 0)
+      time_s += pluralize(@hm[0], "hour")
     end
-    if (hours > 0 && minutes > 0)
+    if (@hm[0] > 0 && @hm[1] > 0)
       time_s += ", "
     end
-    if (minutes > 0)
-      time_s += pluralize(minutes, "minutes")
+    if (@hm[1] > 0)
+      time_s += pluralize(@hm[1], "minutes")
     end
     time_s
+  end
+  
+  def get_hours_mins(total_hours)
+    @hours = total_hours.to_i
+    @minutes = ((total_hours - @hours.to_f) * 60).to_i
+    @hours_mins = [@hours, @minutes]
   end
   
 end

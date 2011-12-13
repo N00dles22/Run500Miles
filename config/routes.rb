@@ -13,14 +13,12 @@ Run500Miles::Application.routes.draw do
   resources :activities #, :only => [:create, :destroy, :edit]
   
   match '/contact', :to => 'pages#contact'
-  #match '/profile', :to => 'pages#profile'
-  #match '/log_run', :to => 'pages#log_run'
   match '/signup', :to => 'users#signup'
   match '/signin', :to => 'sessions#new'
   match '/signout', :to => 'sessions#destroy'
-  #match '/login', :to => 'pages#login'
   match '/about', :to => 'pages#about'
   match '/help', :to => 'pages#help'
+  match '/leaderboards', :to => 'pages#leaderboards'
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   root :to => "pages#home"

@@ -33,6 +33,45 @@ class User < ActiveRecord::Base
     encrypted_password == encrypt(submitted_password)
   end
   
+  def percentages(timespan = "year")
+    @conditions = ''
+    
+    @total_hours = total_time(timespan)
+    @total_miles = total_miles(timespan)
+    
+    if timespan == "week"
+      @conditions = ' AND activity_date >= ' + (Date.today - Date.today.wday).to_s
+    end
+    
+    @mrun = activities.sum(:distance,
+                           :conditions => ['activity_type = 1' + @conditions])
+    @mwalk = activities.sum(:distance,
+                           :conditions => ['activity_type = 2' + @conditions])
+    @trun = activities.sum(:hours,
+                           :conditions => ['activity_type = 1' + @conditions]).to_f +
+            (activities.sum(:minutes,
+                            :conditions => ['activity_type = 1' + @conditions]).to_f/60)
+    @twalk = activities.sum(:hours,
+                           :conditions => ['activity_type = 2' + @conditions]).to_f +
+            (activities.sum(:minutes,
+                            :conditions => ['activity_type = 2' + @conditions]).to_f/60)
+    
+    @ptrun = (@trun/@total_hours)
+    @ptwalk = (@twalk/@total_hours)
+    @pmrun = (@mrun/@total_miles)
+    @pmwalk = (@mwalk/@total_miles)
+    @ptboth = ((@total_hours - @trun - @twalk)/@total_hours)
+    @pmboth = ((@total_miles - @mrun - @mwalk)/@total_miles)
+    
+    @percentages = {:trun => @ptrun.finite? ? @ptrun : 0.0,
+                    :twalk => @ptwalk.finite? ? @ptwalk : 0.0,
+                    :mrun => @pmrun.finite? ? @pmrun : 0.0,
+                    :mwalk => @pmwalk.finite? ? @pmwalk : 0.0,
+                    :tboth => @ptboth.finite? ? @ptboth : 0.0,
+                    :mboth => @pmboth.finite? ? @pmboth : 0.0}
+    
+  end
+  
   def total_miles(timespan)
     case timespan
     when "year"
@@ -79,6 +118,18 @@ class User < ActiveRecord::Base
   def miles_left(timespan)
     total = timespan == "year" ? 500 : 10
     m_left = format("%0.2f", [total - total_miles(timespan), 0].max).to_f
+  end
+  
+  def self.leaders(timespan)
+    @users = User.find(:all)
+    @conditions = []
+    case timespan
+    when "week"
+      @conditions = ['activity_date >= ?', (Date.today - Date.today.wday)]      
+    end
+    
+    @users.sort! { |u1, u2| u2.activities.sum(:distance, :conditions => @conditions) <=>
+                  u1.activities.sum(:distance, :conditions => @conditions)}
   end
   
   def self.authenticate(email, submitted_password)
