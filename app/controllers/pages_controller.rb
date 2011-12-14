@@ -36,9 +36,11 @@ class PagesController < ApplicationController
         @hm = get_hours_mins(users[i].total_time(timespan))
         @total_miles = users[i].total_miles(timespan)
         if (show_zeros || (!show_zeros && @total_miles > 0))
-          @leader_items.push({:name => "#{users[i].fname} #{users[i].lname[0,1].upcase}.",
-                               :distance => "%0.2f" % @total_miles,
-                               :time => "%02d:%02d" % [@hm[0], @hm[1]] })
+          if (current_user.can_view_user?(users[i]))
+            @leader_items.push({:name => "#{users[i].fname} #{users[i].lname[0,1].upcase}.",
+                                 :distance => "%0.2f" % @total_miles,
+                                 :time => "%02d:%02d" % [@hm[0], @hm[1]] })
+          end
         end                      
       end
       @leader_items
