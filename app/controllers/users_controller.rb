@@ -47,7 +47,8 @@ class UsersController < ApplicationController
     @yearly_pie.set_cell(2, 0, 'Ran and Walked')
     @yearly_pie.set_cell(2, 1, @percentages[:mboth])
     
-    chart_opts = { :width => 400, :height => 240, :title => 'Yearly', :is3D => true }
+    chart_opts = { :width => 400, :height => 240, :title => 'Yearly', :is3D => true,
+                    :colors => ['#66FF66', '#66FFFF', '#CCFF99']}
     
     @ychart = GoogleVisualr::Interactive::PieChart.new(@yearly_pie, chart_opts)
     
