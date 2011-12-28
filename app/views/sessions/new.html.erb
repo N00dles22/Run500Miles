@@ -3,11 +3,14 @@
 <%= form_for(:session, :url => sessions_path) do |f| %>
   <div class="field">
     <%= f.label :email %><br />
-    <%= f.text_field :email %>
+    <%= f.text_field :email, :autofocus => true %>
   </div>
   <div class="field">
     <%= f.label :password %><br />
     <%= f.password_field :password %>
+  </div>
+  <div>
+    <%= check_box_tag("persist", "yes", false) %>&nbsp;Keep me signed in on this computer
   </div>
   <div class="actions">
     <%= f.submit "Sign in" %>

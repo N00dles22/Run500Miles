@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
       @title = "Sign In"
       render 'new'
     else
-      sign_in user
+      sign_in(user, params[:persist].nil? ? "no" : params[:persist])
       redirect_back_or root_path
       #redirect_back_or user
     end
