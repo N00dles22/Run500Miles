@@ -2,9 +2,11 @@ module SessionsHelper
   
   def sign_in(user, persist)
     if (persist == "yes")
-		cookies.permanent.signed[:remember_token] = {:value => [user.id, user.salt], :expires => (7 - Date.today.wday).days.from_now}
+	  new_week = (7 - Date.today.wday).days.from_now
+	  expire_date = DateTime.new(new_week.year, new_week.month, new_week.day)
+	  cookies.permanent.signed[:remember_token] = {:value => [user.id, user.salt], :expires => expire_date}
 	else
-		session[:remember_token] = user.id
+	  session[:remember_token] = user.id
 	end
     self.current_user = user
   end
@@ -17,8 +19,8 @@ module SessionsHelper
     @current_user ||= user_from_remember_token
 	
 	if (@current_user.nil?)
-		@current_user ||= session[:remember_token] &&
-		User.find_by_id(session[:remember_token])
+	  @current_user ||= session[:remember_token] &&
+	  User.find_by_id(session[:remember_token])
 	end
 	
 	return @current_user

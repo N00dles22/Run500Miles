@@ -1,0 +1,318 @@
+.container {
+  width: 710px;
+}
+
+body {
+  background: #387C44;
+}
+
+header {
+  padding-top: 20px;
+}
+
+header img {
+  padding: 1em;
+  background: #fff;
+}
+
+section {
+  margin-top: 1em;
+  font-size: 120%;
+  padding: 20px;
+  background: #fff;
+}
+
+section h1 {
+  font-size: 200%;
+}
+
+/* Links */
+
+a {
+  color: #09c;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #069;
+  text-decoration: underline;
+}
+
+a:visited {
+  color: #069;
+}
+
+/* Navigation */
+
+nav {
+  float: right;
+}
+
+nav {
+  background-color: white;
+  padding: 0 0.7em;
+  white-space: nowrap;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  list-style-type: none;
+  display: inline-block;
+  padding: 0.2em 0;
+}
+
+nav ul li a {
+  padding: 0 5px;
+  font-weight: bold;
+}
+
+nav ul li a:visited {
+  color: #09c;
+}
+
+nav ul li a:hover {
+  text-decoration: underline;
+}
+
+/* Sign up button */
+
+a.signup_button {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  text-align: center;
+  width: 190px;
+  color: #fff;
+  background: #006400;
+  font-size: 150%;
+  font-weight: bold;
+  padding: 20px;
+}
+
+a.log_run_button {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  text-align: center;
+  width: 190px;
+  color: #09c;
+  border: 1px solid #09c;
+  background: #CCFFFF;
+  font-size: 150%;
+  font-weight: bold;
+  padding: 5px;
+}
+
+/* Round corners */
+
+.round {
+  -moz-border-radius:    10px;
+  -webkit-border-radius: 10px;
+  border-radius:         10px;
+}
+
+/* footer */
+
+footer {
+  text-align: center;
+  margin-top: 10px;
+  width: 710px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+footer nav {
+  float: none;
+}
+
+/* User show page */
+table.profile {
+  width: 100%;
+  margin-bottom: 0;
+}
+
+td.main {
+  width: 70%;
+  padding: 1em;
+}
+
+td.sidebar {
+  width: 30%;
+  padding: 1em;
+  vertical-align: top;
+  background: #ffc;
+}
+
+.profile img.gravatar {
+  border: 1px solid #999;
+  margin-bottom: -15px;
+}
+
+div.field div.actions {
+  margin-bottom: 10px;
+}
+
+.field_with_errors {
+  margin-top: 10px;
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+.field_with_errors label {
+  color: #fff;
+}
+
+#error_explanation {
+  width: 400px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+
+#error_explanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: -7px;
+  background-color: #c00;
+  color: #fff;
+}
+
+#error_explanation p {
+  color: #333;
+  margin-bottom: 0;
+  padding: 5px;
+}
+
+#error_explanation ul li {
+  font-size: 12px;
+  list-style: square;
+}
+
+ul.users {
+  margin-top: 1em;
+}
+
+.users li {
+  list-style: none;
+}
+
+h1.activity {
+  margin-bottom: 0.3em;
+}
+
+table.activities {
+  margin-top: 1em;
+}
+
+table.activities tr {
+  height: 70px;
+}
+
+table.activities tr td.gravatar {
+  border-top: 1px solid #ccc;
+  vertical-align: top;
+  width: 50px;
+}
+
+table.activities tr td.activity {
+  border-top: 1px solid #ccc;
+  vertical-align: top;
+  padding-top: 10px;
+}
+
+table.activities tr td.activity span.timestamp {
+  display: block;
+  font-size: 85%;
+  color: #666;
+}
+
+div.user_info img {
+  padding-right: 0.1em;
+}
+
+div.user_info a {
+  text-decoration: none;
+}
+
+div.user_info span.user_name {
+  position: absolute;
+}
+
+div.user_info span.activities {
+  font-size: 80%;
+}
+
+form.new_activity {
+  margin-bottom: 2em;
+}
+
+form.new_activity textarea {
+  height: 4em;
+  margin-bottom: 0;
+}
+
+table.leaderboards{
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+table.leaderboards tr th{
+  text-align: center;
+}
+
+table.leaderboard {
+  border: 1px solid black;
+  width: 95%;
+  padding: 3px;
+}
+
+table.leaderboard tr th {
+  border-bottom: 1px solid black;
+  text-align: left;
+  color: #800000
+}
+
+table.leaderboard tr td {
+  text-align: left;
+}
+
+table.leaderboard tr th.leadername{
+  width: 40%;
+  text-align: left;
+}
+
+table.leaderboard tr.leaderuser td{
+  background-color: #99FFCC;
+  border-bottom: 1px dashed #800000;
+  border-top: 1px dashed #800000;
+  text-align: left;
+  font: bold;
+}
+table.leaderboard tr td.leadername{
+  width: 40%;
+  text-align: left;
+}
+
+a.view_leaderboards_button {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  text-align: center;
+  width: 50%;
+  color: #09c;
+  border: 1px solid #09c;
+  background: #CCFFFF;
+  font-size: 110%;
+  font-weight: bold;
+  padding: 10px;
+}
