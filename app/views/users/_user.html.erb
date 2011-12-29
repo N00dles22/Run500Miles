@@ -1,4 +1,4 @@
-<li>
+<li <% if current_user.admin? %>style="border-top: 1px solid black; border-bottom: 1px solid black" <% end %>>
   <%= gravatar_for user, :size => 30 %>
   <%= link_to "#{user.fname} #{user.lname}", user %>
   <% if current_user.admin? %>

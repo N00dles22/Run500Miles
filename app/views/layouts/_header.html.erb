@@ -1,4 +1,4 @@
-<header>
+<header >
   <%= link_to logo, root_path %>
         <nav class="round">
           <ul>
@@ -16,4 +16,18 @@
             <% end %>
           </ul>
         </nav>
+		<br />
+		<br />
+		<div class="qotw round">
+		  <br />
+		  <% if signed_in? && current_user.admin? %>
+		    <span class="qotw-content">
+			  <%= link_to qotw[:content], edit_quote_path %>
+			</span>
+		  <% else %>
+		    <span class="qotw-content"><%= qotw[:content] %></span>
+		  <% end %>		  
+		  <br />
+		  <span class="qotw-source">- <%= qotw[:source] %></span>
+		</div>
       </header>

@@ -319,3 +319,30 @@ a.view_leaderboards_button {
   font-weight: bold;
   padding: 10px;
 }
+
+div.qotw {
+  background: #FFFFFF;
+  float: none;
+  white-space: nowrap;
+  text-align: center;
+  padding: 0 0.7em;
+  /*display: inline-table;*/
+}
+
+span.qotw-content {
+  font-family: cursive;
+  color: #0099CC;
+  font-style: italic;
+  font-weight: bold;
+  font-size: 24pt;
+}
+
+span.qotw-content a {
+  color: #0099CC;
+}
+
+span.qotw-source {
+  color: #6B7272;
+  font-style: italic;
+  font-size: 16pt;
+}

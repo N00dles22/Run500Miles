@@ -1,4 +1,11 @@
+require 'yaml'
+
 module ApplicationHelper
+  
+  # get the quote of the week
+  def qotw
+    { :content => APP_CONFIG['quote-content'], :source => APP_CONFIG['quote-source'] }
+  end
   
   def logo
     image_tag("logo.png", :alt => "Run 500 Miles", :class => "round")
