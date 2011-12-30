@@ -22,10 +22,12 @@
 		  <br />
 		  <% if signed_in? && current_user.admin? %>
 		    <span class="qotw-content">
-			  <%= link_to qotw[:content], edit_quote_path %>
+			  &quot;<%= link_to wrap(qotw[:content], 20), edit_quote_path %>&quot;
 			</span>
 		  <% else %>
-		    <span class="qotw-content"><%= wrap(qotw[:content]) %></span>
+		    <span class="qotw-content">
+			  &quot;<%= wrap(qotw[:content], 20) %>&quot;
+			</span>
 		  <% end %>		  
 		  <br />
 		  <span class="qotw-source">- <%= qotw[:source] %></span>

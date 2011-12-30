@@ -320,7 +320,6 @@ a.view_leaderboards_button {
 div.qotw {
   background: #FFFFFF;
   float: none;
-  white-space: nowrap;
   text-align: center;
   padding: 0 0.7em;
   /*display: inline-table;*/
@@ -331,7 +330,7 @@ span.qotw-content {
   color: #000000;
   font-style: italic;
   font-weight: bold;
-  font-size: 24pt;
+  font-size: 18pt;
 }
 
 span.qotw-content a {
@@ -341,5 +340,5 @@ span.qotw-content a {
 span.qotw-source {
   color: #6B7272;
   font-style: italic;
-  font-size: 16pt;
+  font-size: 14pt;
 }

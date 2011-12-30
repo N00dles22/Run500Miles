@@ -11,10 +11,10 @@
       <%= pluralize(feed_item.minutes, "minute") %> on
       <%= feed_item.activity_date.strftime("%B %e, %Y") %><br />
       <% if !feed_item.location.blank? %>
-        <strong>Location: </strong><%= wrap(feed_item.location) %><br />
+        <strong>Location: </strong><%= wrap(feed_item.location, 50) %><br />
       <% end %>
       <% if !feed_item.comment.blank? %>
-        <strong>Comment: </strong><%= wrap(feed_item.comment) %>
+        <strong>Comment: </strong><%= wrap(feed_item.comment, 50) %>
       <% end %>
     </span>
     <span class="timestamp">
