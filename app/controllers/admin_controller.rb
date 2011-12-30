@@ -9,6 +9,10 @@ class AdminController < ApplicationController
     if (!params[:qotw][:quote].empty? && !params[:qotw][:source].empty?)
       APP_CONFIG.store('quote-content', params[:qotw][:quote])
 	  APP_CONFIG.store('quote-source', params[:qotw][:source])
+	  
+	  # writes to the config file after storing new values
+	  File.open("#{RAILS_ROOT}/config/config.yml", "w") { |f| YAML.dump(APP_CONFIG, f) }
+	  
 	  flash[:success] = "Quote Updated."
 	  redirect_to root_path
 	else

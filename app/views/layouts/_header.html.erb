@@ -25,7 +25,7 @@
 			  <%= link_to qotw[:content], edit_quote_path %>
 			</span>
 		  <% else %>
-		    <span class="qotw-content"><%= qotw[:content] %></span>
+		    <span class="qotw-content"><%= wrap(qotw[:content]) %></span>
 		  <% end %>		  
 		  <br />
 		  <span class="qotw-source">- <%= qotw[:source] %></span>
