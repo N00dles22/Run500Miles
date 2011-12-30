@@ -12,10 +12,10 @@
       on
       <%= activity.activity_date.strftime("%B %e, %Y") %><br />
       <% if !activity.location.blank? %>
-        <strong>Location: </strong><%= wrap(activity.location) %><br />
+        <strong>Location: </strong><%= wrap(activity.location, 30) %><br />
       <% end %>
       <% if !activity.comment.blank? %>
-        <strong>Comment: </strong><%= wrap(activity.comment) %>
+        <strong>Comment: </strong><%= wrap(activity.comment, 30) %>
       <% end %>
     </span>
     <span class="timestamp">
