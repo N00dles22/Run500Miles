@@ -5,6 +5,7 @@
     <nav class="round">
       <ul>
         <li><%= link_to "edit", edit_user_path(user) %></li>
+		<li><%= link_to (user.admin? ? "remove admin" : "make admin"), user_path(user, :admin => "update"), :method => :put %></li>
         <li><%= link_to (user.user_type.nil? ? "family" : (user.user_type.include?("1") ? "family" : "not family")),
             user_path(user, :user_type => toggle_family(user)), :method => :put %></li>
         <li><%= link_to (user.user_type.nil? ? "friend" : (user.user_type.include?("2") ? "friend" : "not friend")),

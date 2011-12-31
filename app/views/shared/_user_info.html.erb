@@ -32,5 +32,8 @@
     <% if current_user.admin? %>
       <strong>User Type</strong><br />
       <%= object.user_type %>
+	  <br />
+	  <strong>Privileges</strong><br />
+	  <%= object.admin? ? "Administrator" : "Regular User" %>
     <% end %>
   </div>
