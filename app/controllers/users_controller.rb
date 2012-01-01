@@ -31,31 +31,6 @@ class UsersController < ApplicationController
     @activities = @user.activities.paginate(:page => params[:page], :per_page => 10)
     @title = @user.fname
     
-    # Graph stuff
-    #@percentages = @user.percentages("year")
-    #@yearly_pie = GoogleVisualr::DataTable.new
-    
-    #@yearly_pie.new_column('string', 'Activity Type')
-    #@yearly_pie.new_column('number', 'Mileage Logged')
-    
-    #@yearly_pie.add_rows(3)
-    
-    #@yearly_pie.set_cell(0, 0, 'Ran')
-    #@yearly_pie.set_cell(0, 1, @percentages[:mrun])
-    #@yearly_pie.set_cell(1, 0, 'Walked')
-    #@yearly_pie.set_cell(1, 1, @percentages[:mwalk])
-    #@yearly_pie.set_cell(2, 0, 'Ran and Walked')
-    #@yearly_pie.set_cell(2, 1, @percentages[:mboth])
-    
-    #chart_opts = { :width => 400, :height => 240, :title => 'Yearly', :is3D => true,
-    #                :colors => ['#66FF66', '#66FFFF', '#CCFF99']}
-    
-    #@ychart = GoogleVisualr::Interactive::PieChart.new(@yearly_pie, chart_opts)
-	
-	#the following goes in the html.erb file
-	#<div id='ychart'>
-	#</div>
-	#<%= render_chart(@ychart, 'ychart') %>
 
     
   end
