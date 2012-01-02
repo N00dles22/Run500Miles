@@ -1,7 +1,7 @@
 include DateUtils
 
 class Statistics
-  attr_reader :user, :mileage_week, :mileage_year, :time_week; :time_year
+  attr_accessor :user, :mileage_week, :mileage_year, :time_week, :time_year
   
   START_DATE = Date.new(2011, 12, 04)
   END_DATE = Date.new(2012, 12, 03)
@@ -14,34 +14,56 @@ class Statistics
 	self.time_year = Stat.new(user, "time", "year")
   end
   
-  def get_chart(chart_type, timespan)
-    
-  end
-      # Graph stuff
-    #@percentages = @user.percentages("year")
-    #@yearly_pie = GoogleVisualr::DataTable.new
-    
-    #@yearly_pie.new_column('string', 'Activity Type')
-    #@yearly_pie.new_column('number', 'Mileage Logged')
-    
-    #@yearly_pie.add_rows(3)
-    
-    #@yearly_pie.set_cell(0, 0, 'Ran')
-    #@yearly_pie.set_cell(0, 1, @percentages[:mrun])
-    #@yearly_pie.set_cell(1, 0, 'Walked')
-    #@yearly_pie.set_cell(1, 1, @percentages[:mwalk])
-    #@yearly_pie.set_cell(2, 0, 'Ran and Walked')
-    #@yearly_pie.set_cell(2, 1, @percentages[:mboth])
-    
-    #chart_opts = { :width => 400, :height => 240, :title => 'Yearly', :is3D => true,
-    #                :colors => ['#66FF66', '#66FFFF', '#CCFF99']}
-    
-    #@ychart = GoogleVisualr::Interactive::PieChart.new(@yearly_pie, chart_opts)
+  def get_pie_chart(chart_type, timespan, opts = {})
+    case chart_type
+	  when "mileage"
+	    c_title = "Mileage Logged"
+	    if (timespan == "week")
+		  c_title += " (week)"
+		  stat_data = mileage_week
+		else
+		  c_title += " (year)"
+		  stat_data = mileage_year
+		end
+	  when "time"
+	    c_title = "Time Logged"
+		if (timespan == "week")
+		  c_title += " (week)"
+		  stat_data = time_week
+		else
+		  c_title += " (year)"
+		  stat_data = time_year
+		end
+	end
+	
+    c_data = GoogleVisualr::DataTable.new
+	
+	c_data.new_column('string', 'Activity Type')
+	c_data.new_column('number', c_title)
+	
+	c_data.add_rows(3)
+	
+	c_data.set_cell(0, 0, 'Ran')
+	c_data.set_cell(0, 1, stat_data.run)
+	c_data.set_cell(1, 0, 'Walked')
+	c_data.set_cell(1, 1, stat_data.walk)
+	c_data.set_cell(2, 0, 'Ran and Walked')
+	c_data.set_cell(2, 1, stat_data.both)
+	
+	c_opts = {:width => 400, :height => 240, :title => c_title, :is3D => true}
+	
+	if (!opts.empty?)
+	  c_opts.merge(opts)
+	end
+	
+	p_chart = GoogleVisualr::Interactive::PieChart.new(c_data, c_opts)
 	
 	#the following goes in the html.erb file
 	#<div id='ychart'>
 	#</div>
 	#<%= render_chart(@ychart, 'ychart') %>
+  end
+    
   private
     def ideal_progress(timespan)
 	  case timespan
@@ -58,7 +80,7 @@ class Statistics
 end
 
 class Stat
-  attr_reader :run, :walk, :both
+  attr_accessor :run, :walk, :both
   
   def initialize(user, stat_type, timespan)
 	conditions = ''
@@ -80,7 +102,7 @@ class Stat
 										:conditions => ['activity_type = 1' + conditions])
 		self.walk = user.activities.sum(:distance,
 										:conditions => ['activity_type = 2' + conditions])
-		self.both = [@total - run - walk, 0.0].max
+		self.both = [total - run - walk, 0.0].max
 	  when "time"
 		self.run = user.activities.sum(:hours,
 									   :conditions => ['activity_type = 1' + conditions]).to_f +

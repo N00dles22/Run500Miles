@@ -31,6 +31,9 @@ class UsersController < ApplicationController
     @activities = @user.activities.paginate(:page => params[:page], :per_page => 10)
     @title = @user.fname
     
+	@stats = Statistics.new(@user)
+	
+	@mileage_breakdown_year = @stats.get_pie_chart("mileage", "year")
 
     
   end
