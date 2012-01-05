@@ -1,6 +1,7 @@
 module DateUtils
-  YEAR_START = Date.new(2011, 12, 04)
-  YEAR_END = Date.new(2012, 12, 03)
+  def year
+    { :start => Date.new(2011, 12, 04), :end => Date.new (2012, 12, 03) }
+  end
   
   def current_week
     wstart = Date.today - Date.today.wday
@@ -11,9 +12,9 @@ module DateUtils
   end
   
   def weeks
-    week_arr = [YEAR_START]
+    week_arr = [year[:start]]
     for i in 1..51
-	  week_arr.push(YEAR_START + i*7)
+	  week_arr.push(year[:start] + i*7)
 	end
 	return week_arr
   end

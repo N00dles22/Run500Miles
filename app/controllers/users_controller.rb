@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :authenticate, :only => [:index, :edit, :update, :destroy, :show]
+  before_filter :authenticate, :only => [:index, :edit, :update, :destroy, :show, :statistics]
   before_filter :correct_user, :only => [:edit, :update]
   before_filter :admin_user, :only => [:destroy]
   before_filter :signed_in,:only => [:signup, :create]
@@ -10,6 +10,14 @@ class UsersController < ApplicationController
     @title = "Sign Up"
   end
 
+  def statistics
+    @user = current_user
+	@title = "Statistics"
+	@stats = Statistics.new(@user)
+	
+	@mileage_breakdown_year = @stats.get_pie_chart("mileage", "year")
+  end
+  
   def index
     @title = "All Users"
     if current_user.admin?
@@ -32,10 +40,7 @@ class UsersController < ApplicationController
     @title = @user.fname
     
 	@stats = Statistics.new(@user)
-	
-	@mileage_breakdown_year = @stats.get_pie_chart("mileage", "year")
-
-    
+	   
   end
   
   def create

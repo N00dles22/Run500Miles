@@ -1,7 +1,14 @@
-<div id='ympchart'>
-	</div>
-	<%= render_chart(@mileage_breakdown_year, 'ympchart') %>
+
+Mileage_Year: <%= "#{@stats.mileage_year.run} #{@stats.mileage_year.walk} #{@stats.mileage_year.both}" %><br />
+Mileage_Week: <%= "#{@stats.mileage_week.run} #{@stats.mileage_week.walk} #{@stats.mileage_week.both}" %><br />
+Time_Year: <%= "#{@stats.time_year.run} #{@stats.time_year.walk} #{@stats.time_year.both}" %><br />
+Time_Week: <%= "#{@stats.time_week.run} #{@stats.time_week.walk} #{@stats.time_week.both}" %><br />
 <br />
+Ideal progress for year: <%= @stats.ideal_progress("year") %>
+<br />
+Ideal progress for week: <%= @stats.ideal_progress("week") %>
+<br />
+Current week: <%= current_week%>
 <% if current_user == @user %>
   <%= link_to "Log a run!", new_activity_path, :class => "log_run_button round" %>
 <% end %>

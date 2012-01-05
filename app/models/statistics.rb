@@ -63,8 +63,11 @@ class Statistics
 	#</div>
 	#<%= render_chart(@ychart, 'ychart') %>
   end
-    
-  private
+  
+  def get_weeks
+    weeks
+  end
+  #private
     def ideal_progress(timespan)
 	  case timespan
 	    when "week"
@@ -83,11 +86,11 @@ class Stat
   attr_accessor :run, :walk, :both
   
   def initialize(user, stat_type, timespan)
-	conditions = ''
+	startdate = year[:start]
 	total = 0.0
 	
 	if (timespan == "week")
-	  conditions = ' AND activity_date >= ' + (Date.today - Date.today.wday).to_s
+	  startdate = current_week
 	end
 	
 	if (stat_type == "mileage")
@@ -99,19 +102,19 @@ class Stat
 	case stat_type
 	  when "mileage"
 		self.run = user.activities.sum(:distance,
-										:conditions => ['activity_type = 1' + conditions])
+										:conditions => ['activity_type = 1 AND activity_date >= ?', startdate])
 		self.walk = user.activities.sum(:distance,
-										:conditions => ['activity_type = 2' + conditions])
+										:conditions => ['activity_type = 2 AND activity_date >= ?', startdate])
 		self.both = [total - run - walk, 0.0].max
 	  when "time"
 		self.run = user.activities.sum(:hours,
-									   :conditions => ['activity_type = 1' + conditions]).to_f +
+									   :conditions => ['activity_type = 1 AND activity_date >= ?', startdate]).to_f +
             (user.activities.sum(:minutes,
-								 :conditions => ['activity_type = 1' + conditions]).to_f/60)
+								 :conditions => ['activity_type = 1 AND activity_date >= ?', startdate]).to_f/60)
 		self.walk = user.activities.sum(:hours,
-									   :conditions => ['activity_type = 2' + conditions]).to_f +
+									   :conditions => ['activity_type = 2 AND activity_date >= ?', startdate]).to_f +
             (user.activities.sum(:minutes,
-								 :conditions => ['activity_type = 2' + conditions]).to_f/60)
+								 :conditions => ['activity_type = 2 AND activity_date >= ?', startdate]).to_f/60)
 		self.both = [total - run - walk, 0.0].max
 	end
   end

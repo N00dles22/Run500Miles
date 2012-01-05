@@ -3,7 +3,8 @@
 }
 
 body {
-  background: #387C44;
+  background-image:url(../../images/feb_hearts.jpg);
+  background-repeat:repeat;
 }
 
 header {
@@ -29,17 +30,17 @@ section h1 {
 /* Links */
 
 a {
-  color: #09c;
+  color: #B20000;
   text-decoration: none;
 }
 
 a:hover {
-  color: #069;
+  color: #B20000;
   text-decoration: underline;
 }
 
 a:visited {
-  color: #069;
+  color: #B20000;
 }
 
 /* Navigation */
@@ -71,7 +72,7 @@ nav ul li a {
 }
 
 nav ul li a:visited {
-  color: #09c;
+  color: #B20000;
 }
 
 nav ul li a:hover {
@@ -86,8 +87,9 @@ a.signup_button {
   display: block;
   text-align: center;
   width: 190px;
-  color: #fff;
-  background: #006400;
+  color: #B20000;
+  background: #F2D6D6;
+  border: 1px solid #B20000;
   font-size: 150%;
   font-weight: bold;
   padding: 20px;
@@ -99,9 +101,9 @@ a.log_run_button {
   display: block;
   text-align: center;
   width: 190px;
-  color: #09c;
-  border: 1px solid #09c;
-  background: #CCFFFF;
+  color: #B20000;
+  border: 1px solid #B20000;
+  background: #F2D6D6;
   font-size: 150%;
   font-weight: bold;
   padding: 5px;
@@ -292,7 +294,7 @@ table.leaderboard tr th.leadername{
 }
 
 table.leaderboard tr.leaderuser td{
-  background-color: #99FFCC;
+  background-color: #F2D6D6;
   border-bottom: 1px dashed #800000;
   border-top: 1px dashed #800000;
   text-align: left;
@@ -309,9 +311,9 @@ a.view_leaderboards_button {
   display: block;
   text-align: center;
   width: 50%;
-  color: #09c;
-  border: 1px solid #09c;
-  background: #CCFFFF;
+  color: #B20000;
+  border: 1px solid #B20000;
+  background: #F2D6D6;
   font-size: 110%;
   font-weight: bold;
   padding: 10px;
@@ -327,18 +329,18 @@ div.qotw {
 
 span.qotw-content {
   font-family: cursive;
-  color: #000000;
+  color: #CC0000;
   font-style: italic;
   font-weight: bold;
   font-size: 18pt;
 }
 
 span.qotw-content a {
-  color: #000000;
+  color: #B20000;
 }
 
 span.qotw-source {
-  color: #6B7272;
+  color: #CC6699;
   font-style: italic;
   font-size: 14pt;
 }

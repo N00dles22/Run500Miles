@@ -15,6 +15,7 @@ Run500Miles::Application.routes.draw do
   
   match '/contact', :to => 'pages#contact'
   match '/signup', :to => 'users#signup'
+  match '/statistics', :to => 'users#statistics'
   match '/signin', :to => 'sessions#new'
   match '/signout', :to => 'sessions#destroy'
   match '/about', :to => 'pages#about'
