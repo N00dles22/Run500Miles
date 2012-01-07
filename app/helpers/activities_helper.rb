@@ -5,11 +5,11 @@ module ActivitiesHelper
   
   def activity_type_s(a_type)
     case a_type
-    when "1"
+    when 1
       "ran"
-    when "2"
+    when 2
       "walked"
-    when "3"
+    when 3
       "ran/walked"
     end
   end
