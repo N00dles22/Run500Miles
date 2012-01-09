@@ -76,7 +76,7 @@ class AdminController < ApplicationController
 
   private
     def dev_user
-	  redirect_to(root_path) unless current_user.email == "nicholas.gallegos@gmail.com"
+	  redirect_to(root_path) unless !current_user.nil? && current_user.email == "nicholas.gallegos@gmail.com"
 	end
     def admin_user
       redirect_to(root_path) unless !current_user.nil? && current_user.admin?
