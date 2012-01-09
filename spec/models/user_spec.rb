@@ -210,14 +210,15 @@ describe User do
 end
 
 
+
 # == Schema Information
 #
 # Table name: users
 #
-#  id                 :integer         not null, primary key
+#  id                 :integer         primary key
 #  email              :string(255)
-#  created_at         :datetime
-#  updated_at         :datetime
+#  created_at         :timestamp
+#  updated_at         :timestamp
 #  fname              :string(255)
 #  lname              :string(255)
 #  encrypted_password :string(255)

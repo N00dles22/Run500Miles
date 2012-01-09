@@ -1,0 +1,12 @@
+<li style="border-top: 1px solid black; border-bottom: 1px solid black">
+<b><%= config.key %>:</b> <%= config.value %>
+<nav class ="round" style="border: 1px solid black">
+<ul>
+<li>
+<%= link_to "edit", site_config_path(:id => config.id) %>
+</li>
+        <li><%= link_to "delete", destroy_config_path(:id => config.id), :method => :delete, :confirm => "Are you sure?",
+                                    :title => "Delete #{config.key}" %></li>
+      </ul>
+</nav>
+</li>

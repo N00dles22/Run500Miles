@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120106182143) do
+ActiveRecord::Schema.define(:version => 20120109000251) do
 
   create_table "activities", :force => true do |t|
     t.string   "comment"
@@ -21,11 +21,16 @@ ActiveRecord::Schema.define(:version => 20120106182143) do
     t.integer  "minutes"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "location",                     :default => ""
-    t.integer  "activity_type", :limit => 255, :default => 3
+    t.string   "location"
+    t.integer  "activity_type"
   end
 
-  add_index "activities", ["user_id", "created_at"], :name => "index_activities_on_user_id_and_created_at"
+  create_table "configurations", :force => true do |t|
+    t.string   "key"
+    t.text     "value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", :force => true do |t|
     t.string    "email"

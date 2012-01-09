@@ -2,7 +2,7 @@
   <%= gravatar_for user, :size => 30 %>
   <%= link_to "#{user.fname} #{user.lname}", user %>
   <% if current_user.admin? %>
-    <nav class="round">
+    <nav class="round" style="border: 1px solid black">
       <ul>
         <li><%= link_to "edit", edit_user_path(user) %></li>
 		<li><%= link_to (user.admin? ? "remove admin" : "make admin"), user_path(user, :admin => "update"), :method => :put %></li>

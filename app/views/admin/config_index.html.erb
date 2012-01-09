@@ -1,0 +1,7 @@
+<h1>Application Configuration</h1>
+<% unless @configs.empty? %>
+<ul class="users">
+  <%= render :partial => 'admin/config', :collection => @configs %>
+</ul>
+<% end %>
+<%= link_to "Create new configuration", new_config_path %>

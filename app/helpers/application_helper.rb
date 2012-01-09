@@ -1,10 +1,12 @@
-require 'yaml'
+#require 'yaml'
 
 module ApplicationHelper
   
   # get the quote of the week
   def qotw
-    { :content => APP_CONFIG['quote-content'], :source => APP_CONFIG['quote-source'] }
+    q_content = Configuration.find_by_key('quote-content')
+	q_source = Configuration.find_by_key('quote-source')
+    { :content => q_content.nil? ? '' : q_content.value, :source => q_source.nil? ? '' : q_source.value }
   end
   
   def logo

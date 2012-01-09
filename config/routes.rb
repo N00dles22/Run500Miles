@@ -11,7 +11,7 @@ Run500Miles::Application.routes.draw do
   resources :users
   resources :sessions, :only => [:new, :create, :destroy]
   resources :activities #, :only => [:create, :destroy, :edit]
-  resources :admin, :only => [:edit_quote, :site_config, :update_quote]
+  resources :admin, :only => [:edit_quote, :site_config, :update_quote, :create_config, :destroy_config, :config_index]
   
   match '/contact', :to => 'pages#contact'
   match '/signup', :to => 'users#signup'
@@ -24,6 +24,11 @@ Run500Miles::Application.routes.draw do
   match '/edit_quote', :to => 'admin#edit_quote'
   match '/site_config', :to => 'admin#site_config'
   match '/update_quote', :to => 'admin#update_quote'
+  match '/create_config', :to => 'admin#create_config'
+  match '/destroy_config', :to => 'admin#destroy_config'
+  match '/config_index', :to => 'admin#config_index'
+  match '/new_config', :to => 'admin#new_config'
+  match '/update_config', :to => 'admin#update_config'
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   root :to => "pages#home"
