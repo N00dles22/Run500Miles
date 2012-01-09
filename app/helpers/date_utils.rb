@@ -1,6 +1,8 @@
+
 module DateUtils
+
   def year
-    { :start => Date.new(2011, 12, 04), :end => Date.new (2012, 12, 03) }
+    { :start => Date.new(2011, 12, 04), :end => Date.new(2012, 12, 03) }
   end
   
   def current_week

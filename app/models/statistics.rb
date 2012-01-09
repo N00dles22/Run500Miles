@@ -1,17 +1,88 @@
 include DateUtils
 
 class Statistics
-  attr_accessor :user, :mileage_week, :mileage_year, :time_week, :time_year
+  attr_accessor :user
   
   START_DATE = Date.new(2011, 12, 04)
   END_DATE = Date.new(2012, 12, 03)
   
   def initialize(user)
 	self.user = user
-	self.mileage_week = Stat.new(user, "mileage", "week")
-	self.mileage_year = Stat.new(user, "mileage", "year")
-	self.time_week = Stat.new(user, "time", "week")
-	self.time_year = Stat.new(user, "time", "year")
+	# leave commented out; improves speed because we 
+	# perform these actions when we need them
+	#self.mileage_week = Stat.new(user, "mileage", "week")
+	#self.mileage_year = Stat.new(user, "mileage", "year")
+	#self.time_week = Stat.new(user, "time", "week")
+	#self.time_year = Stat.new(user, "time", "year")
+  end
+  
+  def mileage_week
+    mw = Stat.new(user, "mileage", "week")
+  end
+  
+  def mileage_year
+    my = Stat.new(user, "mileage", "year")
+  end
+  
+  def time_week
+    tw = Stat.new(user, "time", "week")
+  end
+  
+  def time_year
+    ty = Stat.new(user, "time", "year")
+  end
+  
+  #def get_weekday_activity_bar_chart(timespan, opts = {})
+ # 	c_opts = {:width => 400, :height => 240, :title => c_title, :is3D => true}
+#	
+#	if (!opts.empty?)
+#	  c_opts.merge(opts)
+#	end
+#	
+#	chart = GoogleVisualr::Interactive::PieChart.new(c_data, c_opts)
+  #end
+  
+  def get_speed_line_chart(opts = {})
+    c_data = GoogleVisualr::DataTable.new
+	c_data.new_column('date', 'Date')
+	c_data.new_column('number', 'Run Speed')
+	#c_data.new_column('string', 'title1')
+	#c_data.new_column('string', 'text1')
+	c_data.new_column('number', 'Walk Speed')
+	#c_data.new_column('string', 'title2')
+	#c_data.new_column('string', 'text2')
+	c_data.new_column('number', 'Run-Walk Speed')
+	#c_data.new_column('string', 'title3')
+	#c_data.new_column('string', 'text3')
+	
+	a = user.activities.reverse
+	lrun = 0.0
+	lwalk = 0.0
+	lboth = 0.0
+	a.each do |activity|
+	  @speed = activity.distance/(activity.hours + activity.minutes/60)
+	  case activity.activity_type
+	    when 1
+		  lrun = @speed
+		when 2
+		  lwalk = @speed
+		when 3
+		  lboth = @speed
+	  end
+	  c_data.add_row([activity.activity_date, 
+	      lrun,
+	      lwalk, 
+	      lboth,
+		])
+	end
+	
+	c_opts = { :displayAnnotations => false, 
+	  :legendPosition => 'newRow' }
+	if (!opts.empty?)
+	  c_opts.merge(opts)
+	end
+	
+    chart = GoogleVisualr::Interactive::AnnotatedTimeLine.new(c_data, c_opts)	
   end
   
   def get_pie_chart(chart_type, timespan, opts = {})
@@ -56,7 +127,7 @@ class Statistics
 	  c_opts.merge(opts)
 	end
 	
-	p_chart = GoogleVisualr::Interactive::PieChart.new(c_data, c_opts)
+	chart = GoogleVisualr::Interactive::PieChart.new(c_data, c_opts)
 	
 	#the following goes in the html.erb file
 	#<div id='ychart'>

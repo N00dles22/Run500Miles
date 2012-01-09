@@ -10,19 +10,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111207233522) do
+ActiveRecord::Schema.define(:version => 20120106182143) do
 
   create_table "activities", :force => true do |t|
-    t.string    "comment"
-    t.integer   "user_id"
-    t.date      "activity_date"
-    t.float     "distance"
-    t.integer   "hours"
-    t.integer   "minutes"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-    t.string    "location",      :default => ""
-    t.string    "activity_type", :default => "3"
+    t.string   "comment"
+    t.integer  "user_id"
+    t.date     "activity_date"
+    t.float    "distance"
+    t.integer  "hours"
+    t.integer  "minutes"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "location",                     :default => ""
+    t.integer  "activity_type", :limit => 255, :default => 3
   end
 
   add_index "activities", ["user_id", "created_at"], :name => "index_activities_on_user_id_and_created_at"
