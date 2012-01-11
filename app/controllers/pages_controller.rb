@@ -31,19 +31,27 @@ class PagesController < ApplicationController
   private
   
     def convert_leader_items(users, timespan, show_zeros = false, max_items = users.length )
-      @leader_items = []
+      leader_items = []
       for i in 0...[max_items, users.length].min
-        @hm = get_hours_mins(users[i].total_time(timespan))
-        @total_miles = users[i].total_miles(timespan)
-        if (show_zeros || (!show_zeros && @total_miles > 0))
+	    stats = nil
+		if (timespan == "week")
+		  stats = Statistics.new(users[i]).mileage_week
+		else
+		  stats = Statistics.new(users[i]).mileage_year
+		end
+        hm = get_hours_mins(users[i].total_time(timespan))
+        total_miles = stats.run + stats.walk + stats.both #users[i].total_miles(timespan)
+        if (show_zeros || (!show_zeros && total_miles > 0))
           if (current_user.can_view_user?(users[i]))
-            @leader_items.push({:name => "#{users[i].fname} #{users[i].lname[0,1].upcase}.",
-                                 :distance => "%0.2f" % @total_miles,
-                                 :time => "%02d:%02d" % [@hm[0], @hm[1]] })
+            leader_items.push({:name => "#{users[i].fname} #{users[i].lname}",
+								 :drun => "%0.2f" % (stats.run + stats.both),
+								 :dwalk => "%0.2f" % stats.walk,
+                                 :distance => "%0.2f" % total_miles,
+                                 :time => "%02d:%02d" % [hm[0], hm[1]] })
           end
         end                      
       end
-      @leader_items
+      return leader_items
     end
     
     def get_hours_mins(total_hours)

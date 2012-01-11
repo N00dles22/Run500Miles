@@ -274,7 +274,7 @@ table.leaderboards tr th{
 
 table.leaderboard {
   border: 1px solid black;
-  width: 95%;
+  width: auto;
   padding: 3px;
 }
 

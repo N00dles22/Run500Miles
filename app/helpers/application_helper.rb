@@ -2,6 +2,12 @@
 
 module ApplicationHelper
   
+  def js_array_string(fullArray, excludeItem)
+  
+    inner = fullArray.collect { |item| "\'" + item + "\'" unless item  == excludeItem}.delete_if { |item| item.nil? }.join(", ")
+	return "[" + inner + "]"
+  end
+  
   # get the quote of the week
   def qotw
     q_content = Configuration.find_by_key('quote-content')
