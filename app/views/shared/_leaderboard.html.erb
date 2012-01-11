@@ -1,7 +1,7 @@
 <div id=<%= "leaderboard_" + board_type.downcase %> style="<%= "display: #{board_type == "Year" ? "block" : "none"}"%>">
 <% unless leader_items.empty? %>
 <h3>Leaders for the <%= board_type %></h3>
-<table class="leaderboard round" summary="Leaders"=>
+<table class="leaderboard round" summary="Leaders">
   <tr>
     <th>Rank</th>
     <th class="leadername">Name</th>

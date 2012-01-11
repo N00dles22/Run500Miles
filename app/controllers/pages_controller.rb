@@ -43,7 +43,7 @@ class PagesController < ApplicationController
         total_miles = stats.run + stats.walk + stats.both #users[i].total_miles(timespan)
         if (show_zeros || (!show_zeros && total_miles > 0))
           if (current_user.can_view_user?(users[i]))
-            leader_items.push({:name => "#{users[i].fname} #{users[i].lname[0,1].upcase}.",
+            leader_items.push({:name => "#{users[i].fname} #{users[i].lname}",
 								 :drun => "%0.2f" % (stats.run + stats.both),
 								 :dwalk => "%0.2f" % stats.walk,
                                  :distance => "%0.2f" % total_miles,
