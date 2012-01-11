@@ -28,7 +28,7 @@
 <div id="leaderboards">
 <%= link_to "Back to Top", root_path + "#top" %>
 <br />
-<%= render 'shared/week_year_toggle', :items => ['leaderboard_year', 'leaderboard_week']%>
+View leaders for: <%= render 'shared/week_year_toggle', :items => ['leaderboard_year', 'leaderboard_week']%>
 <%= render 'shared/leaderboard', :leader_items => @yearly_leader_items, :board_type => "Year" %>
 <%= render 'shared/leaderboard', :leader_items => @weekly_leader_items, :board_type => "Week" %>
 <br />
