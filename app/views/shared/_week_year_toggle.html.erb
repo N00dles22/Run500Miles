@@ -1,0 +1,10 @@
+<% items.each do |i| %>
+<input 
+  id=<%="rb" + i %> 
+  type="radio" 
+  name=<%= "rbtoggle" + i.split("_")[0] %> 
+  value=<%= i.split("_")[1].downcase %> 
+  onclick="<%= "setDivVisibility(\'" + i + "\', " + js_array_string(items, i) + ")" %>"
+  <% if items[0] == i %> checked="checked" <% end %> 
+/><%= i.split("_")[1].capitalize %>
+<% end %>

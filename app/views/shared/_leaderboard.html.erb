@@ -1,40 +1,19 @@
-<% unless @weekly_leader_items.empty? && @yearly_leader_items.empty? %>
-  <table class="leaderboards">
-    <tr>
-      <% unless @weekly_leader_items.empty? %>
-        <th><h3>Leaders for the Week</h3></td>
-      <% end %>
-      <% unless @yearly_leader_items.empty? %>
-        <th><h3>Leaders for the Year</h3></td>
-      <% end %>
-    </tr>
-    <tr>
-      <% unless @weekly_leader_items.empty? %>
-        <td align="left">
-          <table class="leaderboard round" summary="Weekly Leaders"=>
-            <tr>
-              <th>Rank</th>
-              <th class="leadername">Name</th>
-              <th>Distance<br />(miles)</th>
-              <th>Time<br />(hh:mm)</th>
-            </tr>
-            <%= render :partial => 'shared/leader_item', :collection => @weekly_leader_items %>
-          </table>
-        </td>
-      <% end %>
-      <% unless @yearly_leader_items.empty? %>
-        <td align="right">
-          <table class="leaderboard round" summary="Yearly Leaders">
-            <tr>
-              <th>Rank</th>
-              <th class="leadername">Name</th>
-              <th>Distance<br />(miles)</th>
-              <th>Time<br />(hh:mm)</th>
-            </tr>
-            <%= render :partial => 'shared/leader_item', :collection => @yearly_leader_items %>
-          </table>
-        </td>
-      <% end %>
-    </tr>
-  </table>
+<div id=<%= "leaderboard_" + board_type.downcase %> style="<%= "display: #{board_type == "Year" ? "block" : "none"}"%>">
+<% unless @leader_items.empty? %>
+<h3>Leaders for the <%= board_type %></h3>
+<table class="leaderboard round" summary="Leaders"=>
+  <tr>
+    <th>Rank</th>
+    <th class="leadername">Name</th>
+	<th>Miles Run</th>
+	<th>Miles Walked</th>
+    <th>Total Miles</th>
+    <th>Time<br />(hh:mm)</th>
+  </tr>
+  <%= render :partial => 'shared/leader_item', :collection => @leader_items %>
+</table>
+*Note: Miles Run includes miles logged as a run/walk
+<% else %>
+<h3>No leaderboard information for the <%= board_type.downcase %></h3>
 <% end %>
+</div>

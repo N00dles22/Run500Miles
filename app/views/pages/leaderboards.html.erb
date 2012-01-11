@@ -1,4 +1,6 @@
 <h1>Leaderboards</h1>
 
+<%= render 'shared/week_year_toggle', :items => ['leaderboard_year', 'leaderboard_week']%>
+<%= render 'shared/leaderboard', :leader_items => @yearly_leader_items, :board_type => "Year" %>
 
-<%= render 'shared/leaderboard' %>
+<%= render 'shared/leaderboard', :leader_items => @weekly_leader_items, :board_type => "Week" %>
