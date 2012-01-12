@@ -16,10 +16,8 @@ class UsersController < ApplicationController
 	@stats = Statistics.new(@user)
 	
 	@mileage_breakdown_year = @stats.get_pie_chart("mileage", "year")
-#	@speed_annotated_timeline = @stats.get_speed_line_chart
-#	<div id='ysatlchart' style='width: 660px; height: 240px;'></div>
-#<%= render_chart(@speed_annotated_timeline, 'ysatlchart') %>
-#<br />
+	@speed_annotated_timeline = @stats.get_speed_line_chart
+
   end
   
   def index

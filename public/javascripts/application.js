@@ -8,7 +8,7 @@ function setDivVisibility(showItem, hideItems) {
     document.getElementById(hideItems[i]).style.display = 'none';
   }
 }
-//<SCRIPT LANGUAGE="JavaScript">
+
 //<!-- Dynamic Version by: Nannette Thacker -->
 //<!-- http://www.shiningstar.net -->
 //<!-- Original by :  Ronnie T. Moore -->
@@ -24,14 +24,13 @@ else
     cntfield.value = maxlimit - field.value.length;
 }
 
-	  var _gaq = _gaq || [];
-	  _gaq.push(['_setAccount', 'UA-28163203-1']);
-	  _gaq.push(['_trackPageview']);
+// Google Analytics Stuff
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-28163203-1']);
+_gaq.push(['_trackPageview']);
 
-	  (function() {
-		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-	  })();
-//  End -->
-//</script>
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();

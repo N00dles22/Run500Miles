@@ -45,13 +45,13 @@ class Statistics
   def get_speed_line_chart(opts = {})
     c_data = GoogleVisualr::DataTable.new
 	c_data.new_column('date', 'Date')
-	c_data.new_column('number', 'Run Speed')
+	c_data.new_column('number', 'Run Speed (mph)')
 	#c_data.new_column('string', 'title1')
 	#c_data.new_column('string', 'text1')
-	c_data.new_column('number', 'Walk Speed')
+	c_data.new_column('number', 'Walk Speed (mph)')
 	#c_data.new_column('string', 'title2')
 	#c_data.new_column('string', 'text2')
-	c_data.new_column('number', 'Run-Walk Speed')
+	c_data.new_column('number', 'Run-Walk Speed (mph)')
 	#c_data.new_column('string', 'title3')
 	#c_data.new_column('string', 'text3')
 	
@@ -59,30 +59,29 @@ class Statistics
 	lrun = 0.0
 	lwalk = 0.0
 	lboth = 0.0
-	a.each do |activity|
-	  @speed = activity.distance/(activity.hours + activity.minutes/60)
-	  case activity.activity_type
-	    when 1
-		  lrun = @speed
+	a.each do |act|
+	  speed = act.distance/(act.hours + act.minutes/60)
+	  case act.activity_type
+	   when 1
+		  lrun = speed
 		when 2
-		  lwalk = @speed
+		  lwalk = speed
 		when 3
-		  lboth = @speed
+		  lboth = speed
 	  end
-	  c_data.add_row([activity.activity_date, 
-	      lrun,
+	  c_data.add_row([act.activity_date, 
+	      @speed,
 	      lwalk, 
-	      lboth,
+	      lboth
 		])
 	end
 	
-	c_opts = { :displayAnnotations => false, 
-	  :legendPosition => 'newRow' }
+	c_opts = { :title => 'Activity Speed', :width => 660, :height => 300, :curveType => 'function', :hAxis => { :title => 'Activity Date' }, :vAxis => { :title => 'Speed (mph)' }}
 	if (!opts.empty?)
 	  c_opts.merge(opts)
 	end
 	
-    chart = GoogleVisualr::Interactive::AnnotatedTimeLine.new(c_data, c_opts)	
+    chart = GoogleVisualr::Interactive::LineChart.new(c_data, c_opts)	
   end
   
   def get_pie_chart(chart_type, timespan, opts = {})
