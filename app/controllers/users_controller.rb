@@ -16,7 +16,8 @@ class UsersController < ApplicationController
 	@stats = Statistics.new(@user)
 	
 	@mileage_breakdown_year = @stats.get_pie_chart("mileage", "year")
-	@speed_annotated_timeline = @stats.get_speed_line_chart
+	#@speed_annotated_timeline = @stats.get_speed_line_chart
+	@wdaybreakdown = @stats.get_weekday_breakdown_bar_chart("year")
 
   end
   

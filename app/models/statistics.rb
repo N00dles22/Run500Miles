@@ -42,6 +42,44 @@ class Statistics
 #	chart = GoogleVisualr::Interactive::PieChart.new(c_data, c_opts)
   #end
   
+  def get_weekday_breakdown_bar_chart(timespan, opts = {})
+    acts = []
+	if (timespan == "week")
+	  acts = user.activities.all
+	else
+	  acts = user.activities.all
+	end
+	# indices: [sun, mon, tue, wed, thur, fri, sat]
+	wdaycount = [0, 0, 0, 0, 0, 0, 0]
+	acts.each do |a|
+	  wdaycount[a.activity_date.wday] += 1
+	end
+	
+	c_data = GoogleVisualr::DataTable.new
+	c_data.new_column('string', 'Week Day')
+	c_data.new_column('number', 'Activities Logged')
+	
+	c_data.add_row(['Sun', wdaycount[0]])
+	c_data.add_row(['Mon', wdaycount[1]])
+	c_data.add_row(['Tues', wdaycount[2]])
+	c_data.add_row(['Wed', wdaycount[3]])
+	c_data.add_row(['Thurs', wdaycount[4]])
+	c_data.add_row(['Fri', wdaycount[5]])
+	c_data.add_row(['Sat', wdaycount[6]])
+	
+	c_opts = {:width => 400, :height => 240, :title => 'Activities Logged for Each Day of the Week', 
+	          :legend => { :position => 'none' },
+	          :hAxis => { :title => 'Day of the Week', :slantedText => true, :slantedTextAngle => 30 },
+			  :vAxis => { :title => 'Activities Logged'}}
+	
+	if (!opts.empty?)
+	  c_opts.merge(opts)
+	end
+	
+	chart = GoogleVisualr::Interactive::ColumnChart.new(c_data, c_opts)
+	
+  end
+  
   def get_speed_line_chart(opts = {})
     c_data = GoogleVisualr::DataTable.new
 	c_data.new_column('date', 'Date')
