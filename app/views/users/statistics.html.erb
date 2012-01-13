@@ -1,6 +1,11 @@
-<div id='ympchart'>
+<div align="center" width="100%" style="display: inline-block;">
+<div id='ympchart' width="45%" style="float: left">
 	</div>
+<div id='wdaybreakdown' width="45%" style="float: right"> </div>
+<%= render_chart(@wdaybreakdown, 'wdaybreakdown') %>
 	<%= render_chart(@mileage_breakdown_year, 'ympchart') %>
+</div>
+	<!--<div id='ysatlchart' style='width: 660px; height: 240px;'></div>-->
+<!--< #render_chart(@speed_annotated_timeline, 'ysatlchart') %> -->
 <br />
-
 <h2>More coming soon!</h2>
