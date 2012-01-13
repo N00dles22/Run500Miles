@@ -67,13 +67,13 @@ class Statistics
 	c_data.add_row(['Fri', wdaycount[5]])
 	c_data.add_row(['Sat', wdaycount[6]])
 	
-	c_opts = {:width => 400, :height => 240, :title => 'Activities Logged for Each Day of the Week', 
+	c_opts = {:width => 370, :height => 240, :title => 'Weekday Activity Breakdown', 
 	          :legend => { :position => 'none' },
 	          :hAxis => { :title => 'Day of the Week', :slantedText => true, :slantedTextAngle => 30 },
 			  :vAxis => { :title => 'Activities Logged'}}
 	
 	if (!opts.empty?)
-	  c_opts.merge(opts)
+	  c_opts.merge!(opts)
 	end
 	
 	chart = GoogleVisualr::Interactive::ColumnChart.new(c_data, c_opts)
@@ -116,7 +116,7 @@ class Statistics
 	
 	c_opts = { :title => 'Activity Speed', :width => 660, :height => 300, :curveType => 'function', :hAxis => { :title => 'Activity Date' }, :vAxis => { :title => 'Speed (mph)' }}
 	if (!opts.empty?)
-	  c_opts.merge(opts)
+	  c_opts.merge!(opts)
 	end
 	
     chart = GoogleVisualr::Interactive::LineChart.new(c_data, c_opts)	
@@ -158,10 +158,10 @@ class Statistics
 	c_data.set_cell(2, 0, 'Ran and Walked')
 	c_data.set_cell(2, 1, stat_data.both)
 	
-	c_opts = {:width => 400, :height => 240, :title => c_title, :is3D => true}
+	c_opts = {:width => 300, :height => 240, :title => c_title, :is3D => true}
 	
 	if (!opts.empty?)
-	  c_opts.merge(opts)
+	  c_opts.merge!(opts)
 	end
 	
 	chart = GoogleVisualr::Interactive::PieChart.new(c_data, c_opts)
