@@ -176,7 +176,7 @@ class Statistics
     weeks
   end
   #private
-    def ideal_progress(timespan)
+    def self.ideal_progress(timespan)
 	  case timespan
 	    when "week"
 		  ideal_p = format("%0.2f", ((Date.today.wday + 1).to_f * 10)/ 7).to_f

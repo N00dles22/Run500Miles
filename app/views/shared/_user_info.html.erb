@@ -5,7 +5,7 @@
   </a>
   <br />
   <br />
-  <!--<strong>URL</strong>  <%= link_to user_path(object), object %><br />-->
+  <!--<strong>URL</strong>  < link_to user_path(object), object %><br />-->
   <strong>Runs Logged</strong> <%= object.activities.count %>
   <br />
   <br />
@@ -14,7 +14,11 @@
       <%= pluralize(object.total_miles("year"), "mile") %> in<br /> 
       <%= total_time_s(object, "year") %>
     </span>
-    <br />
+	<%= Statistics.ideal_progress("year") %>
+	<span class="round">
+	<!--< Utilities::UI.progress_bar(object.total_miles("year"), :ideal_progress => Statistics.ideal_progress("year"), :bar_max => 500, :width => 200) %>-->
+    </span>
+	<br />
     <br />
     <strong>Total this Week</strong><br />
     <span class="activities">
@@ -25,6 +29,7 @@
     <br />
     <strong>Mileage Remaining</strong><br />
     <span class="activities">
+	
       <%= pluralize(object.miles_left("year"), "mile") %> left this <strong>year</strong><br /> 
       <%= pluralize(object.miles_left("week"), "mile") %> left this <strong>week</strong>
     </span>

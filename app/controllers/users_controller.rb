@@ -1,9 +1,12 @@
+#include Utilities
+
 class UsersController < ApplicationController
   before_filter :authenticate, :only => [:index, :edit, :update, :destroy, :show, :statistics]
   before_filter :correct_user, :only => [:edit, :update]
   before_filter :admin_user, :only => [:destroy]
   before_filter :signed_in,:only => [:signup, :create]
   before_filter :same_user_type, :only => [:show]
+  
   
   def signup
     @user = User.new
@@ -15,9 +18,9 @@ class UsersController < ApplicationController
 	@title = "Statistics"
 	@stats = Statistics.new(@user)
 	
-	@mileage_breakdown_year = @stats.get_pie_chart("mileage", "year", get_month_options)
+	@mileage_breakdown_year = @stats.get_pie_chart("mileage", "year", Utilities::UI.get_month_options)
 	#@speed_annotated_timeline = @stats.get_speed_line_chart
-	@wdaybreakdown = @stats.get_weekday_breakdown_bar_chart("year", :colors => get_month_options[:colors])
+	@wdaybreakdown = @stats.get_weekday_breakdown_bar_chart("year", :colors => Utilities::UI.get_month_options[:colors])
 
   end
   
@@ -114,37 +117,6 @@ class UsersController < ApplicationController
   end
   
   private
-    
-	def get_month_options
-	  month = Date.today.month
-	  case month
-	    when 1
-		  return {:colors => ['#0000FF', '#009999', '#669999'].shuffle!, :pieSliceTextStyle => {:color => 'white', :fontName => 'Arial Bold', :fontSize => 12} }
-		when 2
-		  return {:colors => ['#800000', '#A31947', '#9933FF'].shuffle!, :pieSliceTextStyle => {:color => 'black', :fontName => 'Arial Bold', :fontSize => 12} }
-		when 3
-		  return {:colors => ['#006600', '#B8B800', '#33CC33'].shuffle!, :pieSliceTextStyle => {:color => 'black', :fontName => 'Arial Bold', :fontSize => 12} }
-		#when 4
-		#  return {:colors => ['#0000FF', '#009999', '#66FFFF'].shuffle!, :pieSliceTextStyle => {:color => 'white', :fontName => 'Arial Bold', :fontSize => 12} }
-		#when 5
-		#  return {:colors => ['#800000', '#A31947', '#9933FF'].shuffle!, :pieSliceTextStyle => {:color => 'white', :fontName => 'Arial Bold', :fontSize => 12} }
-		#when 6
-		#  return {:colors => ['#006600', '#B8B800', '#33CC33'].shuffle!, :pieSliceTextStyle => {:color => 'white', :fontName => 'Arial Bold', :fontSize => 12} }
-		#when 7
-		#  return {:colors => ['#0000FF', '#009999', '#66FFFF'].shuffle!, :pieSliceTextStyle => {:color => 'white', :fontName => 'Arial Bold', :fontSize => 12} }
-		#when 8
-		#  return {:colors => ['#800000', '#A31947', '#9933FF'].shuffle!, :pieSliceTextStyle => {:color => 'white', :fontName => 'Arial Bold', :fontSize => 12} }
-		#when 9
-		#  return {:colors => ['#006600', '#B8B800', '#33CC33'].shuffle!, :pieSliceTextStyle => {:color => 'white', :fontName => 'Arial Bold', :fontSize => 12} }
-		#when 10
-		#  return {:colors => ['#0000FF', '#009999', '#66FFFF'].shuffle!, :pieSliceTextStyle => {:color => 'white', :fontName => 'Arial Bold', :fontSize => 12} }
-		#when 11
-		#  return {:colors => ['#800000', '#A31947', '#9933FF'].shuffle!, :pieSliceTextStyle => {:color => 'white', :fontName => 'Arial Bold', :fontSize => 12} }
-		#when 12
-		#  return {:colors => ['#006600', '#B8B800', '#33CC33'].shuffle!, :pieSliceTextStyle => {:color => 'white', :fontName => 'Arial Bold', :fontSize => 12} }
-	  end
-	  return {:colors => ['#006600', '#B8B800', '#33CC33'].shuffle!, :pieSliceTextStyle => {:color => 'black', :fontName => 'Arial Bold', :fontSize => 12} }
-	end
             
     def signed_in
       redirect_to(root_path) unless !signed_in?

@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
   has_many :activities, :dependent => :destroy
   
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  sw_regex = /\Aangusbeef\z/i
+  #sw_regex = /\Aangusbeef\z/i
   
   validates :fname, :presence   => true,
                     :length     => { :maximum => 50 }
@@ -37,10 +37,11 @@ class User < ActiveRecord::Base
                         :confirmation => true,
                         :length       => { :within => 6..40 }
                         
-  validates :secret_word, :presence => true,
-                          :format => { :with => sw_regex },
-                          :on => :create
+  #validates :secret_word, :presence => true,
+  #                        :format => { :with => sw_regex },
+  #                        :on => :create
                           
+  validate_on_create :secret_word_okay
   
   before_save :encrypt_password
   
@@ -141,6 +142,19 @@ class User < ActiveRecord::Base
   end
   
   private
+    def secret_word_okay
+	  passing = true
+	  if (self.secret_word.nil? || self.secret_word.length == 0)
+	    errors.add(:secret_word, "cannot be empty.")
+		passing = false;
+	  end
+	  
+	  if (passing && self.secret_word != Configuration.find_by_key('secret-word').value)
+	    errors.add(:secret_word, "is not correct")
+	  end
+	  
+	end
+  
     def encrypt_password
       self.salt = make_salt unless has_password?(password)
       self.encrypted_password = encrypt(password)
