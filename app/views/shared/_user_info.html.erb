@@ -4,36 +4,35 @@
     <strong><%= "#{object.fname} #{object.lname}" %></strong><br />    
   </a>
   <br />
-  <br />
-  <!--<strong>URL</strong>  < link_to user_path(object), object %><br />-->
   <strong>Runs Logged</strong> <%= object.activities.count %>
   <br />
   <br />
-    <strong>Total for Year</strong><br />
+    <strong>This Week</strong><br />
     <span class="activities">
-      <%= pluralize(object.total_miles("year"), "mile") %> in<br /> 
-      <%= total_time_s(object, "year") %>
-    </span>
-	<!--< Statistics.ideal_progress("year") %>-->
-	<span class="round">
-	<!--< Utilities::UI.progress_bar(object.total_miles("year"), :ideal_progress => Statistics.ideal_progress("year"), :bar_max => 500, :width => 200) %>-->
-    </span>
-	<br />
-    <br />
-    <strong>Total this Week</strong><br />
-    <span class="activities">
-      <%= pluralize(object.total_miles("week"), "mile") %> in <br />
+      <%= pluralize(object.total_miles("week"), "mile") %> in
       <%= total_time_s(object, "week") %>
     </span>
-    <br />
-    <br />
-    <strong>Mileage Remaining</strong><br />
+	<span>
+	<%= Utilities::UI.progress_bar(object.total_miles("week"), :bar_max => 10, :width => 200, :height => 15) %>
+    </span>
+	<span class="activities"><div align="right"><%= pluralize(object.miles_left("week"), "mile") %> left</div></span>
+    <strong>The Year</strong><br />
+    <span class="activities">
+      <%= pluralize(object.total_miles("year"), "mile") %> in
+      <%= total_time_s(object, "year") %>
+    </span>
+	<span>
+	<%= Utilities::UI.progress_bar(object.total_miles("year"), :bar_max => 500, :width => 200, :height => 15) %>
+    </span>
+	<span class="activities"><div align="right"><%= pluralize(object.miles_left("year"), "mile") %> left</div></span>
+	<br />
+    <!--<strong>Mileage Remaining</strong><br />
     <span class="activities">
 	
-      <%= pluralize(object.miles_left("year"), "mile") %> left this <strong>year</strong><br /> 
-      <%= pluralize(object.miles_left("week"), "mile") %> left this <strong>week</strong>
+      < pluralize(object.miles_left("year"), "mile") %> left this <strong>year</strong><br /> 
+      < pluralize(object.miles_left("week"), "mile") %> left this <strong>week</strong>
     </span>
-    <br />
+    <br />-->
     <% if current_user.admin? %>
       <strong>User Type</strong><br />
       <%= object.user_type %>

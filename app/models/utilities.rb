@@ -18,6 +18,9 @@ class Utilities
       text_color = options[:text_color] || "white"       
       text_content = content_tag(:span,text,:style=>"margin-right: 3px; color: #{text_color};")  
     end       
+	if progress > bar_max
+	  progress = bar_max
+	end
     bar_style = "width: #{width}px; background: #{bg_color}; border: 1px solid black; height: #{height}px;"  
     progress_style = "text-align: right; float: left; background: #{bar_color}; width: #{progress*width/bar_max}px; height: #{height}px"  
     iprog_style = "width: #{ideal_progress*width/bar_max}px; height: => #{height}px; border-right: 1px solid #{iprog_color}"
