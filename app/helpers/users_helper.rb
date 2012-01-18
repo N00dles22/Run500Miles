@@ -48,7 +48,7 @@ module UsersHelper
     if (@hm[1] > 0)
       time_s += pluralize(@hm[1], "minutes")
     end
-    time_s
+    time_s == "" ? "0 minutes" : time_s
   end
   
   def get_hours_mins(total_hours)
