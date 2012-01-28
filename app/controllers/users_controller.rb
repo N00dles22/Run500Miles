@@ -18,9 +18,12 @@ class UsersController < ApplicationController
 	@title = "Statistics"
 	@stats = Statistics.new(@user)
 	
-	@mileage_breakdown_year = @stats.get_pie_chart("mileage", "year", Utilities::UI.get_month_options)
+	month_opts = Utilities::UI.get_month_options
+	
+	@mileage_breakdown_year = @stats.get_pie_chart("mileage", "year", month_opts)
+	#@average_mph = @stats.get_average_mph_guage("year", "all", :yellowColor => month_opts[:colors][0], :redColor => month_opts[:colors][1] )
 	#@speed_annotated_timeline = @stats.get_speed_line_chart
-	@wdaybreakdown = @stats.get_weekday_breakdown_bar_chart("year", :colors => Utilities::UI.get_month_options[:colors])
+	@wdaybreakdown = @stats.get_weekday_breakdown_bar_chart("year", :colors => month_opts[:colors])
 
   end
   

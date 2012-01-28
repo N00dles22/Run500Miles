@@ -42,6 +42,56 @@ class Statistics
 #	chart = GoogleVisualr::Interactive::PieChart.new(c_data, c_opts)
   #end
   
+  def average_mph(timespan, activity_type)
+    dist_stat = nil
+	time_stat = nil
+	mph = 0.0
+    if (timespan == "week")
+	  dist_stat = mileage_week
+	  time_stat = time_week
+	else
+	  dist_stat = mileage_year
+	  time_stat = time_year
+	end
+	
+	case activity_type
+	  when "run"
+	    mph = (dist_stat.run + dist_stat.both)/(time_stat.run + time_stat.both)
+	  when "walk"
+	    mph = dist_stat.walk/time_stat.walk
+	  when "overall"
+	    mph = dist_stat.total/time_stat.total
+	end
+	
+	return format("%0.2f", mph).to_f
+  end
+  
+  def get_average_mph_guage(timespan, activity_type, opts = {})
+    c_data = GoogleVisualr::DataTable.new
+	c_data.new_column('string', 'Label')
+	c_data.new_column('number', 'Speed')
+	
+	
+	mph = average_mph(timespan, activity_type)
+	title = activity_type.capitalize
+	
+	c_data.add_row([title, format("%0.2f", mph).to_f])
+	
+	
+	c_opts = { :width => 600, :height => 200, 
+			   :redFrom => 12, :redTo => 14,
+			   :yellowFrom => 9, :yellowTo => 12,
+			   :minorTicks => 2, :max => 14,
+			   :majorTicks => ["0", "2", "4", "6", "8", "10", "12", "14"]}
+			   
+	if (!opts.empty?)
+	  c_opts.merge!(opts)
+	end
+	
+	chart = GoogleVisualr::Interactive::Gauge.new(c_data, c_opts)
+	
+  end
+  
   def get_weekday_breakdown_bar_chart(timespan, opts = {})
     acts = []
 	if (timespan == "week")
@@ -191,20 +241,20 @@ class Statistics
 end
 
 class Stat
-  attr_accessor :run, :walk, :both
+  attr_accessor :run, :walk, :both, :total
   
   def initialize(user, stat_type, timespan)
 	startdate = year[:start]
-	total = 0.0
+	self.total = 0.0
 	
 	if (timespan == "week")
 	  startdate = current_week
 	end
 	
 	if (stat_type == "mileage")
-	  total = user.total_miles(timespan)
+	  self.total = user.total_miles(timespan)
 	elsif (stat_type == "time")
-	  total = user.total_time(timespan)
+	  self.total = user.total_time(timespan)
 	end
 	
 	case stat_type
@@ -213,7 +263,7 @@ class Stat
 										:conditions => ['activity_type = 1 AND activity_date >= ?', startdate])
 		self.walk = user.activities.sum(:distance,
 										:conditions => ['activity_type = 2 AND activity_date >= ?', startdate])
-		self.both = [total - run - walk, 0.0].max
+		self.both = to_2_decimal_f([total - run - walk, 0.0].max)
 	  when "time"
 		self.run = user.activities.sum(:hours,
 									   :conditions => ['activity_type = 1 AND activity_date >= ?', startdate]).to_f +
@@ -223,7 +273,12 @@ class Stat
 									   :conditions => ['activity_type = 2 AND activity_date >= ?', startdate]).to_f +
             (user.activities.sum(:minutes,
 								 :conditions => ['activity_type = 2 AND activity_date >= ?', startdate]).to_f/60)
-		self.both = [total - run - walk, 0.0].max
+		self.both = to_2_decimal_f([total - run - walk, 0.0].max)
 	end
   end
+  
+  private
+    def to_2_decimal_f(n)
+	  format("%0.2f", n).to_f
+	end
 end
