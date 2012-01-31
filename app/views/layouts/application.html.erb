@@ -5,6 +5,9 @@
     <%= csrf_meta_tag %>    
     <%= render 'layouts/stylesheets' %>
     <%= javascript_include_tag :defaults %>
+	<% if title.include?('Statistics') %>
+	  <%= javascript_include_tag :graphs %>
+	<% end %>
   </head>
   <body>
     <div class="container"  id="top">      

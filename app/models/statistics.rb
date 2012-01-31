@@ -66,32 +66,6 @@ class Statistics
 	return format("%0.2f", mph).to_f
   end
   
-  def get_average_mph_guage(timespan, activity_type, opts = {})
-    c_data = GoogleVisualr::DataTable.new
-	c_data.new_column('string', 'Label')
-	c_data.new_column('number', 'Speed')
-	
-	
-	mph = average_mph(timespan, activity_type)
-	title = activity_type.capitalize
-	
-	c_data.add_row([title, format("%0.2f", mph).to_f])
-	
-	
-	c_opts = { :width => 600, :height => 200, 
-			   :redFrom => 12, :redTo => 14,
-			   :yellowFrom => 9, :yellowTo => 12,
-			   :minorTicks => 2, :max => 14,
-			   :majorTicks => ["0", "2", "4", "6", "8", "10", "12", "14"]}
-			   
-	if (!opts.empty?)
-	  c_opts.merge!(opts)
-	end
-	
-	chart = GoogleVisualr::Interactive::Gauge.new(c_data, c_opts)
-	
-  end
-  
   def get_weekday_breakdown_bar_chart(timespan, opts = {})
     acts = []
 	if (timespan == "week")
@@ -208,7 +182,7 @@ class Statistics
 	c_data.set_cell(2, 0, 'Ran and Walked')
 	c_data.set_cell(2, 1, stat_data.both)
 	
-	c_opts = {:width => 300, :height => 240, :title => c_title, :is3D => true}
+	c_opts = {:width => 300, :height => 300, :title => c_title, :is3D => true}
 	
 	if (!opts.empty?)
 	  c_opts.merge!(opts)

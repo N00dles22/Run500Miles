@@ -1,12 +1,34 @@
 
+<div align="center">
+<strong>
+<h3>Average Speed</h3>
+<input id="rbYearMPH" type="radio" checked="true" name="rbTimeSpan" onclick="setDivVisibility('divMPHYear', ['divMPHWeek']); changeGauge(-1, 'year');"/>Year
+<input id="rbWeekMPH" type="radio" name="rbTimeSpan" onclick="setDivVisibility('divMPHWeek', ['divMPHYear']); changeGauge(-1, 'week');"/>Week
 
+<div id="avgmph" style="align:center; width:200px; height: 200px;" ></div>
+
+<div id="divMPHYear">
+<input id="rbYearRun" type="radio" name="rbYear" onclick="changeGauge(<%= @average_mph[:year_run] %>, 'year');"/>Run
+<input id="rbYearWalk" type="radio" name="rbYear" onclick="changeGauge(<%= @average_mph[:year_walk] %>, 'year');"/>Walk
+<input id="rbYearOverall" type="radio" name="rbYear" onclick="changeGauge(<%= @average_mph[:year_overall] %>, 'year');"/>Overall
+</div>
+<div id="divMPHWeek" style="display:none">
+<input id="rbWeekRun" type="radio" name="rbWeek" onclick="changeGauge(<%= @average_mph[:week_run] %>, 'week');"/>Run
+<input id="rbWeekWalk" type="radio" name="rbWeek" onclick="changeGauge(<%= @average_mph[:week_walk] %>, 'week');"/>Walk
+<input id="rbWeekOverall" type="radio" name="rbWeek" onclick="changeGauge(<%= @average_mph[:week_overall] %>, 'week');"/>Overall
+</div>
+</strong>
+</div>
+<br />
+<div style="align: center; width: 100%; height: 1px; border-top: 1px solid silver;"></div>
 <div align="center" width="100%" style="display: inline-block;">
 <div id='ympchart' width="45%" style="float: left">
 	</div>
 <div id='wdaybreakdown' width="45%" style="float: right"> </div>
-Average Speeds for the Year (mph)
-<input id="b1" type="button" value="Change Value">
-<div id="avgmph" align="center"></div>
+<br />
+<br />
+
+
 
 
 <%= render_chart(@wdaybreakdown, 'wdaybreakdown') %>
@@ -16,49 +38,11 @@ Average Speeds for the Year (mph)
 	<!--<div id='ysatlchart' style='width: 660px; height: 240px;'></div>-->
 <!--< #render_chart(@speed_annotated_timeline, 'ysatlchart') %> -->
 <br />
-<h2>More coming soon!</h2>
+<h4>If you keep checking back, there might be something new here...</h4>
 
 <div>
 <script type="text/javascript">
-   google.load('visualization', '1', {packages:['gauge']});
-      google.setOnLoadCallback(init);
-	  var chart;
-	  var data;
-	  var options;
-	  var button = document.getElementById('b1');
-      function init() {
-        data = new google.visualization.DataTable();
-        data.addColumn('string', 'Label');
-        data.addColumn('number', 'Value');
-        data.addRows([
-          ['Memory', 80]
-        ]);
-
-        options = {
-          width: 400, height: 120,
-          redFrom: 90, redTo: 100,
-          yellowFrom:75, yellowTo: 90,
-          minorTicks: 5, animation: { duration: 2000, easing: 'out' }
-        };
-
-        chart = new google.visualization.Gauge(document.getElementById('avgmph'));
-        chart.draw(data, options);
-      }
-	  
-	  function drawChart() {
-	    button.disabled = true;
-		google.visualization.events.addListener(chart, 'ready', 
-		  function() {
-		    button.disabled = false;
-		  });
-		  chart.draw(data, options);
-	  }
-	  
-	  button.onclick = function() {
-	    var newValue = 100 - data.getValue(0, 1);
-		data.setValue(0, 1, newValue);
-		drawChart();
-	  }
+   
 	  
 </script>
 </div>
