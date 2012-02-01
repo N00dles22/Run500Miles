@@ -23,8 +23,8 @@ function initGauge() {
     yellowFrom:9, yellowTo: 12, max:14,
 	majorTicks: ['0', '2', '4', '6', '8', '10', '12', '14'],
     minorTicks: 2, animation: { duration: 1000, easing: 'out' } , 
-	yellowColor: colors[1],
-	redColor: colors[0]
+	yellowColor: '#FFFFFF', // colors[1]
+	redColor: '#FFFFFF' //colors[0]
   };
   gauge_chart = new google.visualization.Gauge(document.getElementById('avgmph'));
   gauge_chart.draw(gauge_data, gauge_options);
