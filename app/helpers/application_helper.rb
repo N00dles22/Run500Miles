@@ -2,6 +2,18 @@
 
 module ApplicationHelper
   
+  def ideal_progress (timespan)
+    Statistics::ideal_progress(timespan)
+  end
+  
+  def progress_bar(object, timespan)
+    if (timespan == "year")
+	  Utilities::UI.progress_bar(object.total_miles("year"), :ideal_progress => ideal_progress("year"), :bar_max => 500, :width => 200, :height => 15)
+	else
+	  Utilities::UI.progress_bar(object.total_miles("week"), :ideal_progress => ideal_progress("week"), :bar_max => 10, :width => 200, :height => 15)
+	end
+  end
+  
   def js_array_string(fullArray, excludeItem)
   
     inner = fullArray.collect { |item| "\'" + item + "\'" unless item  == excludeItem}.delete_if { |item| item.nil? }.join(", ")
