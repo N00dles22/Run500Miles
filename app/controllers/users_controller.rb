@@ -98,16 +98,25 @@ class UsersController < ApplicationController
 	  case
 		when !params[:user_type].nil? && User.update_all({:user_type => params[:user_type]}, {:id => @user.id})
 		  flash[:success] = "User type updated."
+		  redirect_to users_path
 		when !params[:admin].nil?
 		  if (current_user?(@user))
 		    flash[:error] = "You may not alter your own admin privileges!"
+			redirect_to users_path
 		  elsif User.update_all({:admin => !@user.admin?}, {:id => @user.id})
 			flash[:success] = "User permissions updated."
+			redirect_to users_path
 		  else
 		    flash[:error] = "Couldn't update permissions"
+			redirect_to users_path
 		  end
+		else
+		  flash[:error] = "Error updating user"
+		  @title = "Edit User"
+          @user.password = ""
+          @user.password_confirmation = ""
+          render 'edit'
 	  end
-      redirect_to users_path
     else    
       @title = "Edit User"
       @user.password = ""
