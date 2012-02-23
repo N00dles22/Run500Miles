@@ -8,6 +8,11 @@ class PagesController < ApplicationController
       @weekly_leader_items = convert_leader_items(User.leaders("week"), "week", false, 5)
       @yearly_leader_items = convert_leader_items(User.leaders("year"), "year", false, 5)
     end
+	
+	respond_to do |format|
+	  format.html
+	  format.js
+	end
   end
 
   def leaderboards

@@ -41,7 +41,7 @@ class User < ActiveRecord::Base
   #                        :format => { :with => sw_regex },
   #                        :on => :create
                           
-  validate_on_create :secret_word_okay
+  validate :secret_word_okay, :on => :create
   
   before_save :encrypt_password
   

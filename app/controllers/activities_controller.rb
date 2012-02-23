@@ -43,9 +43,20 @@ class ActivitiesController < ApplicationController
   end
 
   def destroy
+	@activity = Activity.find(params[:id])
     @activity.destroy
-    flash[:notice] = "Activity deleted!"
-    redirect_back_or root_path
+	
+	respond_to do |format|
+	  format.html { 
+		flash[:notice] = "Activity deleted!"
+		redirect_back_or root_path 
+	  }
+	  format.js { 		
+	    @user_info = render_to_string(:partial => 'shared/user_info', :locals => {:object => current_user}) 
+	  }
+	end
+    #
+    #redirect_back_or root_path
   end
   
   private

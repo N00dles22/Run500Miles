@@ -1,0 +1,8 @@
+jQuery(document).ready(function() {
+
+	jQuery('.delete_activity').bind('ajax:success', function() {  
+		jQuery(this).closest('tr').fadeOut();  
+		//jQuery('#divUserInfo').html('<%= pluralize(current_user.activities.count, "Activity") %>');
+		jQuery('#divUserInfo').html('<%= escape_javascript(@user_info) %>');
+	}); 
+});

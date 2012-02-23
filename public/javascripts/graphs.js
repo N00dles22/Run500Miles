@@ -1,3 +1,9 @@
+//jquery test
+ //$(document).ready(function(){
+ //  $("a").click(function(event){
+ //    alert("Thanks for visiting!");
+ //  });
+ //});
 
 // google visualization guage
 google.load('visualization', '1', {packages:['gauge']});

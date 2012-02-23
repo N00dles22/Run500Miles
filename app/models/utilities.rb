@@ -23,7 +23,7 @@ class Utilities
 	end
     bar_style = "width: #{width}px; background: #{bg_color}; border: 1px solid black; height: #{height}px;"  
     progress_style = "text-align: right; float: left; background: #{bar_color}; width: #{progress*width/bar_max}px; height: #{height}px"  
-    iprog_style = "float: left; width: #{ideal_progress*width/bar_max}px; height: => #{height}px; border-right: 1px dashed #{iprog_color}"
+    iprog_style = "float: left; width: #{ideal_progress*width/bar_max}px; height: => #{height}px; border-right: 1px solid #{iprog_color}"
     if (ideal_progress > progress)
       content_tag(:div, 
         content_tag(:div, content_tag(:div,text_content,:style=>progress_style), :style => iprog_style ),

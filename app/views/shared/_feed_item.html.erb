@@ -24,9 +24,7 @@
   <% if current_user?(feed_item.user) %>
     
     <td>
-      <%= link_to "delete", feed_item, :method => :delete,
-                                       :confirm => "Are you sure?",
-                                       :title => feed_item.comment %>
+	  <%= link_to "delete", feed_item, :confirm => "Are you sure?", :method => :delete, :remote=>true, :class=>"delete_activity" %>
     </td>
   <% end %>
 </tr>

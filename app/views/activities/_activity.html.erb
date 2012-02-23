@@ -27,9 +27,7 @@
       <%= link_to "edit", edit_activity_path(activity) %>
     </td>
   <td>
-    <%= link_to "delete", activity, :method => :delete,
-                                     :confirm => "Are you sure?",
-                                     :title => activity.comment %>
+	<%= link_to "delete", activity, :confirm => "Are you sure?", :method => :delete, :remote=>true, :class=>"delete_activity" %>
   </td>
   <% end %>
 </tr>
