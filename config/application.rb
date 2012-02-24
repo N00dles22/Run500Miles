@@ -34,6 +34,7 @@ module Run500Miles
     #config.action_view.javascript_expansions[:defaults] = %w(rails)
 	config.action_view.javascript_expansions[:graphs] = %w(graphs)
 	config.action_view.javascript_expansions[:jquery] = %w(jquery-1.7.1.min)
+	config.action_view.javascript_expansions[:jquery_ui] = %w(jquery-ui-1.8.17.custom.min)
 
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"

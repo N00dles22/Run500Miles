@@ -1,0 +1,18 @@
+
+
+
+//jQuery('#activity_form').html('<%= escape_javascript(@activity_form) %>');
+//jQuery("#new-activity-button").button().click(function() {
+	//jQuery('#activity_distance').focus();
+	jQuery("#activity-form").dialog("option", "title", "Edit Activity");
+	jQuery("#activity-form").dialog("option", "buttons", {
+			"Update Activity": function () {
+				jQuery( this ).dialog( "close" );
+			},
+			"Cancel": function () {
+				jQuery( this ).dialog( "close" );
+			}
+		});
+	jQuery("#activity-form").dialog( "open" );
+	
+//});

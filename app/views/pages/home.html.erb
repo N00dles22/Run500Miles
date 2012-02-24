@@ -26,14 +26,20 @@
   </table>
 <br />
 <div id="leaderboards">
-<%= link_to "Back to Top", root_path + "#top" %>
-<br />
-<div align="right"><strong>View leaders for: <%= render 'shared/leaderboards_toggle', :items => ['leaderboard_year', 'leaderboard_week']%></strong></div>
-<%= render 'shared/leaderboard', :leader_items => @yearly_leader_items, :board_type => "Year" %>
-<%= render 'shared/leaderboard', :leader_items => @weekly_leader_items, :board_type => "Week" %>
+	<%= link_to "Back to Top", root_path + "#top" %>
+	<ul>
+		<li><a href="#leaderboards-year">Year</a></li>
+		<li><a href="#leaderboards-week">Week</a></li>
+	</ul>
+	<div id="leaderboards-year">
+		<%= render 'shared/leaderboard', :leader_items => @yearly_leader_items, :board_type => "Year" %>
+	</div>
+	<div id="leaderboards-week">
+		<%= render 'shared/leaderboard', :leader_items => @weekly_leader_items, :board_type => "Week" %>
+	</div>
+</div>
 <br />
 <%= link_to "Don't see yourself? View the full list!", leaderboards_path, :class => "view_leaderboards_button round" %>
-</div>
   <% else %>
     <h1>Run 500 Miles</h1>
 <p>

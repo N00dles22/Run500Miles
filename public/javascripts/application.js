@@ -2,11 +2,37 @@
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
 
-//jQuery.ajaxSetup({
-//	'beforeSend': function(xhr) {xhr.setRequestHeader("Accept", "text/javascript")}
-//})
+jQuery.ajaxSetup({
+	'beforeSend': function(xhr) {xhr.setRequestHeader("Accept", "text/javascript")}
+})
 
+jQuery(document).ready(function(){
+	var currentDate = new Date();
+	jQuery('#activity_activity_date').datepicker({ defaultDate: +0, showAnim: 'slideDown', maxDate: new Date() });
+	
+	jQuery("#leaderboards").tabs();
+	
+	//jQuery('#activity_activity_date') = '12/16/2012'
+	jQuery("#activity-form").dialog({
+	autoOpen: false,
+	height: 'auto',
+	width: 500,
+	modal: true,
+	buttons: {
+		"Log Activity": function () {
+			jQuery( this ).dialog( "close" );
+		},
+		"Cancel": function () {
+			jQuery( this ).dialog( "close" );
+		}
+	},
+	close: function() {
+		//jQuery( this ).dialog( "close" );
+	}
 
+	});
+	
+});
 
 // This is used to toggle div visibilities
 function setDivVisibility(showItem, hideItems) {
