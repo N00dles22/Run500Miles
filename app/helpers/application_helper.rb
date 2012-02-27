@@ -41,4 +41,43 @@ module ApplicationHelper
     end
   end
   
+  def monthly_theme
+	case Date.today.month
+	  when 1
+	    "months/january"
+	  when 2
+	    "months/february"
+	  when 3
+	    "months/march"
+	  when 4
+	    "months/april"
+	  when 5
+	    "months/may"
+	  when 6
+	    "months/june"
+	  when 7
+	    "months/july"
+	  when 8
+	    "months/august"
+	  when 9
+	    "months/september"
+	  when 10
+	    "months/october"
+	  when 11
+	    "months/november"
+	  when 12
+	    "months/december"
+	end
+  end
+  
+  def jquery_ui_theme
+    jquery_theme = "jquery_ui/" + Configuration.find_by_key('jquery-ui-theme').value + "/jquery-ui-1.8.18.custom"
+	
+	if (!File.exists?("public/stylesheets/" + jquery_theme + ".css"))
+	  return "jquery_ui/smoothness/jquery-ui-1.8.18.custom"
+	else
+	  return jquery_theme
+	end
+  end
+  
 end

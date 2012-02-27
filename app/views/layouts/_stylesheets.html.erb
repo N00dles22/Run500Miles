@@ -4,31 +4,6 @@
     <script src='http://www.google.com/jsapi'></script>
     <%= stylesheet_link_tag "blueprint/screen", :media => 'screen' %>
     <%= stylesheet_link_tag "blueprint/print", :media => 'print' %>
-	<%= stylesheet_link_tag "jquery_ui/smoothness/jquery-ui-1.8.17.custom", :media => 'screen' %>
+	<%= stylesheet_link_tag jquery_ui_theme, :media => 'screen' %>
     <!--[if lt IE 8]><%= stylesheet_link_tag 'blueprint/ie' %><![endif]-->
-	<% case Date.today.month %>
-	<%	when 1 %>
-		<%= stylesheet_link_tag "months/january", :media => 'screen' %>
-	<%	when 2 %>
-		<%= stylesheet_link_tag "months/february", :media => 'screen' %>
-	<%	when 3 %>
-		<%= stylesheet_link_tag "months/march", :media => 'screen' %>
-	<%	when 4 %>
-		<%= stylesheet_link_tag "months/april", :media => 'screen' %>
-	<%	when 5 %>
-		<%= stylesheet_link_tag "months/may", :media => 'screen' %>
-	<%	when 6 %>
-		<%= stylesheet_link_tag "months/june", :media => 'screen' %>
-	<%	when 7 %>
-		<%= stylesheet_link_tag "months/july", :media => 'screen' %>
-	<%	when 8 %>
-		<%= stylesheet_link_tag "months/august", :media => 'screen' %>
-	<%	when 9 %>
-		<%= stylesheet_link_tag "months/september", :media => 'screen' %>
-	<%	when 10 %>
-		<%= stylesheet_link_tag "months/october", :media => 'screen' %>
-	<%	when 11 %>
-		<%= stylesheet_link_tag "months/november", :media => 'screen' %>
-	<%	when 12 %>
-		<%= stylesheet_link_tag "months/december", :media => 'screen' %>
-	<% end %>
+	<%= stylesheet_link_tag monthly_theme, :media => 'screen' %>
