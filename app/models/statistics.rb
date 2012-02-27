@@ -91,7 +91,7 @@ class Statistics
 	c_data.add_row(['Fri', wdaycount[5]])
 	c_data.add_row(['Sat', wdaycount[6]])
 	
-	c_opts = {:width => 370, :height => 240, :title => 'Weekday Activity Breakdown', 
+	c_opts = {:width => 600, :height => 240,
 	          :legend => { :position => 'none' },
 	          :hAxis => { :title => 'Day of the Week', :slantedText => true, :slantedTextAngle => 30 },
 			  :vAxis => { :title => 'Activities Logged'}}
@@ -182,7 +182,7 @@ class Statistics
 	c_data.set_cell(2, 0, 'Ran and Walked')
 	c_data.set_cell(2, 1, stat_data.both)
 	
-	c_opts = {:width => 300, :height => 300, :title => c_title, :is3D => true}
+	c_opts = {:width => 600, :height => 240, :title => c_title, :is3D => true}
 	
 	if (!opts.empty?)
 	  c_opts.merge!(opts)

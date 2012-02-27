@@ -12,6 +12,10 @@ jQuery(document).ready(function(){
 	
 	jQuery("#leaderboards").tabs();
 	
+	jQuery(".radio_ui").buttonset();
+	
+	jQuery(".accordian_ui").accordion( { fillSpace: false });
+	
 	//jQuery('#activity_activity_date') = '12/16/2012'
 	jQuery("#activity-form").dialog({
 	autoOpen: false,

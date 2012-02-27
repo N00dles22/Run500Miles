@@ -1,48 +1,46 @@
 
-<div align="center">
-<strong>
-<h3>Average Speed</h3>
-<input id="rbYearMPH" type="radio" checked="true" name="rbTimeSpan" onclick="setDivVisibility('divMPHYear', ['divMPHWeek']); changeGauge(-1, 'year');"/>Year
-<input id="rbWeekMPH" type="radio" name="rbTimeSpan" onclick="setDivVisibility('divMPHWeek', ['divMPHYear']); changeGauge(-1, 'week');"/>Week
-
-<div id="avgmph" style="align:center; width:200px; height: 200px;" ></div>
-
-<div id="divMPHYear">
-<input id="rbYearRun" type="radio" name="rbYear" onclick="changeGauge(<%= @average_mph[:year_run] %>, 'year');"/>Run
-<input id="rbYearWalk" type="radio" name="rbYear" onclick="changeGauge(<%= @average_mph[:year_walk] %>, 'year');"/>Walk
-<input id="rbYearOverall" type="radio" name="rbYear" onclick="changeGauge(<%= @average_mph[:year_overall] %>, 'year');"/>Overall
-</div>
-<div id="divMPHWeek" style="display:none">
-<input id="rbWeekRun" type="radio" name="rbWeek" onclick="changeGauge(<%= @average_mph[:week_run] %>, 'week');"/>Run
-<input id="rbWeekWalk" type="radio" name="rbWeek" onclick="changeGauge(<%= @average_mph[:week_walk] %>, 'week');"/>Walk
-<input id="rbWeekOverall" type="radio" name="rbWeek" onclick="changeGauge(<%= @average_mph[:week_overall] %>, 'week');"/>Overall
-</div>
-</strong>
-</div>
-<br />
-<div style="align: center; width: 100%; height: 1px; border-top: 1px solid silver;"></div>
-<div align="center" width="100%" style="display: inline-block;">
-<div id='ympchart' width="45%" style="float: left">
+<div class="accordian_ui">
+	<h3><a href="#">Average Speed</a></h3>
+	<div align="center">
+		<strong>
+			<div id="divYearWeekMPH" class="radio_ui">
+				<input id="rbYearMPH" type="radio" checked="true" name="rbTimeSpan" onclick="setDivVisibility('divMPHYear', ['divMPHWeek']); changeGauge(-1, 'year');"/><label for="rbYearMPH">Year</label>
+				<input id="rbWeekMPH" type="radio" name="rbTimeSpan" onclick="setDivVisibility('divMPHWeek', ['divMPHYear']); changeGauge(-1, 'week');"/><label for="rbWeekMPH">Week</label>
+			</div>
+			<div id="avgmph" style="align:center; width:200px; height: 200px;" ></div>
+			<div id="divMPHYear" class="radio_ui">
+				<input id="rbYearRun" type="radio" name="rbYear" onclick="changeGauge(<%= @average_mph[:year_run] %>, 'year');"/><label for="rbYearRun">Run</label>
+				<input id="rbYearWalk" type="radio" name="rbYear" onclick="changeGauge(<%= @average_mph[:year_walk] %>, 'year');"/><label for="rbYearWalk">Walk</label>
+				<input id="rbYearOverall" type="radio" name="rbYear" onclick="changeGauge(<%= @average_mph[:year_overall] %>, 'year');"/><label for="rbYearOverall">Overall</label>
+			</div>
+			<div id="divMPHWeek" style="display:none" class="radio_ui">
+				<input id="rbWeekRun" type="radio" name="rbWeek" onclick="changeGauge(<%= @average_mph[:week_run] %>, 'week');"/><label for="rbWeekRun">Run</label>
+				<input id="rbWeekWalk" type="radio" name="rbWeek" onclick="changeGauge(<%= @average_mph[:week_walk] %>, 'week');"/><label for="rbWeekWalk">Walk</label>
+				<input id="rbWeekOverall" type="radio" name="rbWeek" onclick="changeGauge(<%= @average_mph[:week_overall] %>, 'week');"/><label for="rbWeekOverall">Overall</label>
+			</div>
+		</strong>
 	</div>
-<div id='wdaybreakdown' width="45%" style="float: right"> </div>
-<br />
-<br />
-
-
-
-
-<%= render_chart(@wdaybreakdown, 'wdaybreakdown') %>
-	<%= render_chart(@mileage_breakdown_year, 'ympchart') %>
-	<!--< #render_chart(@average_mph, 'avgmph') %>-->
+	
+	<h3><a href="#">Mileage Logged</a></h3>
+	<div align="center"">
+		<div id='ympchart'></div>
+		<%= render_chart(@wdaybreakdown, 'wdaybreakdown') %>
+	</div>
+	
+	<h3><a href="#">Weekday Activity Breakdown</a></h3>
+	<div align="center">		
+		<div id='wdaybreakdown'> </div>
+		<%= render_chart(@mileage_breakdown_year, 'ympchart') %>
+	</div>
+	
+	<!--<h3><a href="#">Speeds for the Year</a></h3>
+	<div align="center">
+		<div id='speedlinechart'></div>
+	</div>-->
+	
 </div>
+
 	<!--<div id='ysatlchart' style='width: 660px; height: 240px;'></div>-->
 <!--< #render_chart(@speed_annotated_timeline, 'ysatlchart') %> -->
 <br />
 <h4>If you keep checking back, there might be something new here...</h4>
-
-<div>
-<script type="text/javascript">
-   
-	  
-</script>
-</div>

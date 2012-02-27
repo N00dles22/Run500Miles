@@ -1,20 +1,23 @@
-//jquery test
- //$(document).ready(function(){
- //  $("a").click(function(event){
- //    alert("Thanks for visiting!");
- //  });
- //});
-
 // google visualization guage
-google.load('visualization', '1', {packages:['gauge']});
-google.setOnLoadCallback(initGauge);
+google.load('visualization', '1', {packages:['gauge', 'corechart']});
+google.setOnLoadCallback(initCharts);
 var colors = getColorScheme();
+
+var line_chart;
+var line_data;
+var line_options;
+
 var gauge_chart;
 var gauge_data;
 var gauge_options;
 var gauge_year_val;
 var gauge_week_val;
-//var button;
+
+function initCharts() {
+	initGauge();
+	initLine();
+}
+
 function initGauge() {
   gauge_data = new google.visualization.DataTable();
   gauge_data.addColumn('string', 'Label');
@@ -41,6 +44,29 @@ function initGauge() {
   rbYear.click();
 }
 
+function initLine() {
+  line_data = new google.visualization.DataTable();
+  line_data.addColumn('string', '');
+  line_data.addColumn('number', 'Run Speed');
+  line_data.addColumn('number', 'Walk Speed');
+  line_data.addColumn('number', 'Run/Walk Speed');
+  
+  line_data.addRows([
+	['hello', 20, 30, 40],
+	['goodbye', 50, 40, 30],
+	['stop it', 10, 70, 60]
+  ]);
+  
+  line_options = {
+    title: 'Speeds',
+	width: 600, height: 240,
+	hAxis: { title: 'Activity Date' },
+	vAxis: { title: 'Speed (mph)' }
+  }
+  
+  line_chart = new google.visualization.LineChart(document.getElementById('speedlinechart'));
+  line_chart.draw(line_data, line_options);
+}
 	  
 function drawGaugeChart() {
 	gauge_chart.draw(gauge_data, gauge_options);
