@@ -1,37 +1,40 @@
-
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
 
-jQuery.ajaxSetup({
+// set a different alias for jQuery so we don't clash with prototype
+var $jq = jQuery.noConflict();
+
+$jq.ajaxSetup({
 	'beforeSend': function(xhr) {xhr.setRequestHeader("Accept", "text/javascript")}
 })
 
-jQuery(document).ready(function(){
+$jq(document).ready(function(){
 	var currentDate = new Date();
-	jQuery('#activity_activity_date').datepicker({ defaultDate: +0, showAnim: 'slideDown', maxDate: new Date() });
+	$jq('#activity_activity_date').datepicker({ defaultDate: +0, showAnim: 'slideDown', maxDate: new Date() });
 	
-	jQuery("#leaderboards").tabs();
+	//$jq('#progress').progressbar( { value: 1 } );
 	
-	jQuery(".radio_ui").buttonset();
+	$jq("#leaderboards").tabs();
 	
-	jQuery(".accordian_ui").accordion( { fillSpace: false });
+	$jq(".radio_ui").buttonset();
 	
-	//jQuery('#activity_activity_date') = '12/16/2012'
-	jQuery("#activity-form").dialog({
+	$jq(".accordian_ui").accordion( { fillSpace: false });
+	
+	$jq("#activity-form").dialog({
 	autoOpen: false,
 	height: 'auto',
 	width: 500,
 	modal: true,
 	buttons: {
 		"Log Activity": function () {
-			jQuery( this ).dialog( "close" );
+			$jq( this ).dialog( "close" );
 		},
 		"Cancel": function () {
-			jQuery( this ).dialog( "close" );
+			$jq( this ).dialog( "close" );
 		}
 	},
 	close: function() {
-		//jQuery( this ).dialog( "close" );
+		//$jq( this ).dialog( "close" );
 	}
 
 	});
@@ -40,9 +43,9 @@ jQuery(document).ready(function(){
 
 // This is used to toggle div visibilities
 function setDivVisibility(showItem, hideItems) {
-  document.getElementById(showItem).style.display = 'block';
+  $jq("#" + showItem).toggle(true);
   for (var i = 0; i < hideItems.length; i++) {
-    document.getElementById(hideItems[i]).style.display = 'none';
+    $jq("#" + hideItems[i]).toggle(false);
   }
 }
 
@@ -62,7 +65,7 @@ else
     cntfield.value = maxlimit - field.value.length;
 }
 
-// Google Analytics Stuff
+// Google Analytics Stuff--------------------------
 var _gaq = _gaq || [];
 _gaq.push(['_setAccount', 'UA-28163203-1']);
 _gaq.push(['_trackPageview']);
@@ -72,3 +75,4 @@ _gaq.push(['_trackPageview']);
   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 })();
+//------------------------------------------------

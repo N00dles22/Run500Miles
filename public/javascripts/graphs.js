@@ -1,4 +1,27 @@
-// google visualization guage
+
+$jq(function() {
+	$jq('#rbYearMPH,#rbWeekMPH').click(function() {
+		var thisIDSelector = "#" + this.id;
+		var params = $jq(thisIDSelector).data("yearweekparams");
+		var showDiv = params[0];
+		var hideDivs = params[1];
+		var timespan = params[2];
+		
+		setDivVisibility(showDiv, hideDivs);
+		changeGauge(-1, timespan);
+	})
+	
+	$jq("#rbYearRun,#rbYearWalk,#rbYearOverall,#rbWeekRun,#rbWeekWalk,#rbWeekOverall").click(function() {
+		var thisIDSelector = "#" + this.id;
+		var params = $jq(thisIDSelector).data("walkrunparams");
+		var newvalue = params[0];
+		var timespan = params[1];
+		
+		changeGauge(newvalue, timespan);
+	})
+})
+
+// google visualization api
 google.load('visualization', '1', {packages:['gauge', 'corechart']});
 google.setOnLoadCallback(initCharts);
 var colors = getColorScheme();
@@ -15,7 +38,7 @@ var gauge_week_val;
 
 function initCharts() {
 	initGauge();
-	initLine();
+	//initLine();
 }
 
 function initGauge() {

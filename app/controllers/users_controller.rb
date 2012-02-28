@@ -32,6 +32,7 @@ class UsersController < ApplicationController
 	#[stats.average_mph("year", "run"), stats.average_mph("year", "walk")]
 	#@average_mph = @stats.get_average_mph_guage("year", "all", :yellowColor => month_opts[:colors][0], :redColor => month_opts[:colors][1] )
 	#@speed_annotated_timeline = @stats.get_speed_line_chart
+	@speed_line_chart = stats.get_speed_line_chart(:colors => month_opts[:colors])
 	@wdaybreakdown = stats.get_weekday_breakdown_bar_chart("year", :colors => month_opts[:colors])
 
   end

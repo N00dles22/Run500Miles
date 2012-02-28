@@ -32,16 +32,6 @@ class Statistics
     ty = Stat.new(user, "time", "year")
   end
   
-  #def get_weekday_activity_bar_chart(timespan, opts = {})
- # 	c_opts = {:width => 400, :height => 240, :title => c_title, :is3D => true}
-#	
-#	if (!opts.empty?)
-#	  c_opts.merge(opts)
-#	end
-#	
-#	chart = GoogleVisualr::Interactive::PieChart.new(c_data, c_opts)
-  #end
-  
   def average_mph(timespan, activity_type)
     dist_stat = nil
 	time_stat = nil
@@ -107,38 +97,24 @@ class Statistics
   def get_speed_line_chart(opts = {})
     c_data = GoogleVisualr::DataTable.new
 	c_data.new_column('date', 'Date')
-	c_data.new_column('number', 'Run Speed (mph)')
-	#c_data.new_column('string', 'title1')
-	#c_data.new_column('string', 'text1')
-	c_data.new_column('number', 'Walk Speed (mph)')
-	#c_data.new_column('string', 'title2')
-	#c_data.new_column('string', 'text2')
-	c_data.new_column('number', 'Run-Walk Speed (mph)')
-	#c_data.new_column('string', 'title3')
-	#c_data.new_column('string', 'text3')
-	
-	a = user.activities.reverse
-	lrun = 0.0
-	lwalk = 0.0
-	lboth = 0.0
+	c_data.new_column('number', 'Run Speed')
+	c_data.new_column('number', 'Walk Speed')
+	c_data.new_column('number', 'Run/Walk Speed (mph)')
+	a = user.activities
 	a.each do |act|
-	  speed = act.distance/(act.hours + act.minutes/60)
+	  speed = act.distance/(act.hours.to_f + (act.minutes.to_f)/60).to_f
+	  s = format("%0.2f", speed).to_f
 	  case act.activity_type
 	   when 1
-		  lrun = speed
+		  c_data.add_row([act.activity_date, s, nil, nil])
 		when 2
-		  lwalk = speed
+		  c_data.add_row([act.activity_date, nil, s, nil])
 		when 3
-		  lboth = speed
+		  c_data.add_row([act.activity_date, nil, nil, s])
 	  end
-	  c_data.add_row([act.activity_date, 
-	      @speed,
-	      lwalk, 
-	      lboth
-		])
 	end
 	
-	c_opts = { :title => 'Activity Speed', :width => 660, :height => 300, :curveType => 'function', :hAxis => { :title => 'Activity Date' }, :vAxis => { :title => 'Speed (mph)' }}
+	c_opts = { :width => 600, :height => 240, :curveType => 'none', :hAxis => { :title => 'Activity Date' }, :vAxis => { :title => 'Speed (mph)' }, :interpolateNulls => true }
 	if (!opts.empty?)
 	  c_opts.merge!(opts)
 	end
@@ -175,14 +151,14 @@ class Statistics
 	
 	c_data.add_rows(3)
 	
-	c_data.set_cell(0, 0, 'Ran')
+	c_data.set_cell(0, 0, 'Miles Run')
 	c_data.set_cell(0, 1, stat_data.run)
-	c_data.set_cell(1, 0, 'Walked')
+	c_data.set_cell(1, 0, 'Miles Walked')
 	c_data.set_cell(1, 1, stat_data.walk)
-	c_data.set_cell(2, 0, 'Ran and Walked')
+	c_data.set_cell(2, 0, 'Miles Run/Walked')
 	c_data.set_cell(2, 1, stat_data.both)
 	
-	c_opts = {:width => 600, :height => 240, :title => c_title, :is3D => true}
+	c_opts = {:width => 600, :height => 240, :is3D => true}
 	
 	if (!opts.empty?)
 	  c_opts.merge!(opts)
