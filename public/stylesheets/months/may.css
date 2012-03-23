@@ -29,17 +29,17 @@ section h1 {
 /* Links */
 
 a {
-  color: #09c;
+  color: #9933FF;
   text-decoration: none;
 }
 
 a:hover {
-  color: #069;
+  color: #9933FF;
   text-decoration: underline;
 }
 
 a:visited {
-  color: #069;
+  color: #9933FF;
 }
 
 /* Navigation */
@@ -71,7 +71,7 @@ nav ul li a {
 }
 
 nav ul li a:visited {
-  color: #09c;
+  color: #9933FF;
 }
 
 nav ul li a:hover {
@@ -87,7 +87,8 @@ a.signup_button {
   text-align: center;
   width: 190px;
   color: #fff;
-  background: #006400;
+  border: 1px solid #99CC00;
+  background: #990000;
   font-size: 150%;
   font-weight: bold;
   padding: 20px;
@@ -99,9 +100,9 @@ a.log_run_button {
   display: block;
   text-align: center;
   width: 190px;
-  color: #09c;
-  border: 1px solid #09c;
-  background: #CCFFFF;
+  color: #fff;
+  border: 1px solid #99CC00;
+  background: #990000;
   font-size: 150%;
   font-weight: bold;
   padding: 5px;
@@ -279,7 +280,7 @@ table.leaderboard {
 table.leaderboard tr th {
   border-bottom: 1px solid black;
   text-align: left;
-  color: #800000
+  color: #9933FF
 }
 
 table.leaderboard tr td {
@@ -292,9 +293,9 @@ table.leaderboard tr th.leadername{
 }
 
 table.leaderboard tr.leaderuser td{
-  background-color: #99FFCC;
-  border-bottom: 1px dashed #800000;
-  border-top: 1px dashed #800000;
+  background-color: #99CC00;
+  border-bottom: 1px dashed #9933FF;
+  border-top: 1px dashed #9933FF;
   text-align: left;
   font: bold;
 }
@@ -309,9 +310,9 @@ a.view_leaderboards_button {
   display: block;
   text-align: center;
   width: 50%;
-  color: #09c;
-  border: 1px solid #09c;
-  background: #CCFFFF;
+  color: #ffffff;
+  border: 1px solid #99CC00;
+  background: #990000;
   font-size: 110%;
   font-weight: bold;
   padding: 10px;
@@ -327,18 +328,18 @@ div.qotw {
 
 span.qotw-content {
   font-family: cursive;
-  color: #000000;
+  color: #990000;
   font-style: italic;
   font-weight: bold;
   font-size: 18pt;
 }
 
 span.qotw-content a {
-  color: #000000;
+  color: #990000;
 }
 
 span.qotw-source {
-  color: #6B7272;
+  color: #99CC00;
   font-style: italic;
   font-size: 14pt;
 }
