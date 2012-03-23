@@ -3,7 +3,8 @@
 }
 
 body {
-  background: #0099FF;
+  background-image:url(../../images/apr_showers.jpg);
+  background-repeat: repeat;
 }
 
 header {
