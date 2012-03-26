@@ -3,7 +3,8 @@
 }
 
 body {
-  background: #387C44;
+  background-image:url(../../images/may_flowers.jpg);
+  background-repeat: repeat;
 }
 
 header {
