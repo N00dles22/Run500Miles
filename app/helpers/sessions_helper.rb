@@ -2,8 +2,8 @@ module SessionsHelper
   
   def sign_in(user, persist)
     if (persist == "yes")
-	  new_week = (6 - Date.today.wday).days.from_now
-	  #expire_date = DateTime.new(new_week.year, new_week.month, new_week.day)
+	  sun = (7 - Time.now.wday).days.from_now
+	  new_week = Time.local(sun.year, sun.month, sun.day, 0, 0, 0)
 	  cookies.signed[:remember_token] = {:value => [user.id, user.salt], :expires => new_week}
 	else
 	  session[:remember_token] = user.id
