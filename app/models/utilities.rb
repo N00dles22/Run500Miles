@@ -48,10 +48,10 @@ class Utilities
 	    return {:colors => ['#008F47', '#0099FF', '#FFFF4D'].shuffle!, :pieSliceTextStyle => {:color => 'black', :fontName => 'Arial Bold', :fontSize => 12} }
 	  when 5
 	    return {:colors => ['#990000', '#0099CC', '#99CC00'].shuffle!, :pieSliceTextStyle => {:color => 'white', :fontName => 'Arial Bold', :fontSize => 12} }
-	  #when 6
-	  #  return {:colors => ['#006600', '#B8B800', '#33CC33'].shuffle!, :pieSliceTextStyle => {:color => 'white', :fontName => 'Arial Bold', :fontSize => 12} }
-	  #when 7
-	  #  return {:colors => ['#0000FF', '#009999', '#66FFFF'].shuffle!, :pieSliceTextStyle => {:color => 'white', :fontName => 'Arial Bold', :fontSize => 12} }
+	  when 6
+	    return {:colors => ['#f30a25', '#48c82e', '#c9b46b'].shuffle!, :pieSliceTextStyle => {:color => 'white', :fontName => 'Arial Bold', :fontSize => 12} }
+	  when 7
+	    return {:colors => ['#661598', '#f90000', '#59f33a'].shuffle!, :pieSliceTextStyle => {:color => 'white', :fontName => 'Arial Bold', :fontSize => 12} }
 	  #when 8
 	  #  return {:colors => ['#800000', '#A31947', '#9933FF'].shuffle!, :pieSliceTextStyle => {:color => 'white', :fontName => 'Arial Bold', :fontSize => 12} }
 	  #when 9

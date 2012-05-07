@@ -3,7 +3,8 @@
 }
 
 body {
-  background: #387C44;
+  background-image:url(../../images/july_fireworks.jpg);
+  background-repeat: repeat;
 }
 
 header {
@@ -29,17 +30,17 @@ section h1 {
 /* Links */
 
 a {
-  color: #09c;
+  color: #23235e;
   text-decoration: none;
 }
 
 a:hover {
-  color: #069;
+  color: #23235e;
   text-decoration: underline;
 }
 
 a:visited {
-  color: #069;
+  color: #23235e;
 }
 
 /* Navigation */
@@ -71,7 +72,7 @@ nav ul li a {
 }
 
 nav ul li a:visited {
-  color: #09c;
+  color: #23235e;
 }
 
 nav ul li a:hover {
@@ -86,8 +87,9 @@ a.signup_button {
   display: block;
   text-align: center;
   width: 190px;
-  color: #fff;
-  background: #006400;
+  color: #f90000;
+  border: 1px solid #661598;
+  background: #23235e;
   font-size: 150%;
   font-weight: bold;
   padding: 20px;
@@ -99,9 +101,9 @@ a.log_run_button {
   display: block;
   text-align: center;
   width: 190px;
-  color: #09c;
-  border: 1px solid #09c;
-  background: #CCFFFF;
+  color: #f90000;
+  border: 1px solid #661598;
+  background: #23235e;
   font-size: 150%;
   font-weight: bold;
   padding: 5px;
@@ -279,7 +281,7 @@ table.leaderboard {
 table.leaderboard tr th {
   border-bottom: 1px solid black;
   text-align: left;
-  color: #800000
+  color: #661598
 }
 
 table.leaderboard tr td {
@@ -292,9 +294,10 @@ table.leaderboard tr th.leadername{
 }
 
 table.leaderboard tr.leaderuser td{
-  background-color: #99FFCC;
-  border-bottom: 1px dashed #800000;
-  border-top: 1px dashed #800000;
+  color: #fff;
+  background-color: #23235e;
+  border-bottom: 1px dashed #59f33a;
+  border-top: 1px dashed #59f33a;
   text-align: left;
   font: bold;
 }
@@ -309,9 +312,9 @@ a.view_leaderboards_button {
   display: block;
   text-align: center;
   width: 50%;
-  color: #09c;
-  border: 1px solid #09c;
-  background: #CCFFFF;
+  color: #f90000;
+  border: 1px solid #661598;
+  background: #23235e;
   font-size: 110%;
   font-weight: bold;
   padding: 10px;
@@ -327,18 +330,18 @@ div.qotw {
 
 span.qotw-content {
   font-family: cursive;
-  color: #000000;
+  color: #23235e;
   font-style: italic;
   font-weight: bold;
   font-size: 18pt;
 }
 
 span.qotw-content a {
-  color: #000000;
+  color: #23235e;
 }
 
 span.qotw-source {
-  color: #6B7272;
+  color: #f90000;
   font-style: italic;
   font-size: 14pt;
 }
